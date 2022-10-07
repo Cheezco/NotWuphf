@@ -28,7 +28,8 @@ namespace NotWuphfAPI.Infrastructure
             }
             else
             {
-                throw new NotImplementedException();
+                services.AddDbContext<MainContext>(x =>
+                     x.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=postgres"));
             }
 
             services
