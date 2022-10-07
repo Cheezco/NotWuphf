@@ -11,9 +11,10 @@ namespace NotWuphfAPI.Core.Specifications
 {
     public class PostsSpec : Specification<Post>
     {
-        public PostsSpec(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        public PostsSpec(int groupid, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             Query
+                .Where(x => x.Group.Id == groupid)
                 .Skip(PaginationHelper.CalculateSkip(pageSize, page))
                 .Take(PaginationHelper.CalculateTake(pageSize));
         }
