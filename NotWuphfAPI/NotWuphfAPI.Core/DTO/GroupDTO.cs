@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 
 namespace NotWuphfAPI.Core.DTO
 {
-    public record GroupDTO(int Id, string Name, GroupVisibility Visibility, DateTime CreationDate);
+    public record GroupDTO(int Id, string Name, string Description, GroupVisibility Visibility, DateTime CreationDate);
+    public record CreateGroupDTO(string Name, string Description, GroupVisibility Visibility);
+    public record UpdateGroupDTO(string Name, string Description, GroupVisibility Visibility);
 }
