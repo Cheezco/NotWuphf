@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NotWuphfAPI.Infrastructure.Data;
+using NotWuphfAPI.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,9 @@ namespace NotWuphfAPI.Infrastructure
             {
                 throw new NotImplementedException();
             }
+
+            services
+                .AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
         }
     }
 }
