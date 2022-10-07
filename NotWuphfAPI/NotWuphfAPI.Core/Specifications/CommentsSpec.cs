@@ -11,9 +11,10 @@ namespace NotWuphfAPI.Core.Specifications
 {
     public class CommentsSpec : Specification<Comment>
     {
-        public CommentsSpec(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        public CommentsSpec(int groupId, int postId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             Query
+                .Where(x => x.Post.Group.Id == groupId && x.Post.Id == postId)
                 .Skip(PaginationHelper.CalculateSkip(pageSize, page))
                 .Take(PaginationHelper.CalculateTake(pageSize));
         }
