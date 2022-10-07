@@ -9,11 +9,14 @@ namespace NotWuphfAPI.Core.Misc
     public class PaginationHelper
     {
         public const int DefaultPage = 1;
-        public const int DefaultPageSize = 10;
+        public const int DefaultPageSize = 5;
+        public const int MaxPageSize = 10;
 
         public static int CalculateTake(int pageSize)
         {
-            return pageSize <= 0 ? DefaultPageSize : pageSize;
+            int size = Math.Clamp(pageSize, 0, MaxPageSize);
+
+            return size <= 0 ? DefaultPage : size;
         }
 
         public static int CalculateSkip(int pageSize, int page)
