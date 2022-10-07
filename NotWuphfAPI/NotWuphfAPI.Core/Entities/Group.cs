@@ -10,6 +10,7 @@ namespace NotWuphfAPI.Core.Entities
     public class Group : EntityBase
     {
         public string Name { get; set; }
+        public string Description { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastPost { get; set; }
         public List<User> Admins { get; set; }
