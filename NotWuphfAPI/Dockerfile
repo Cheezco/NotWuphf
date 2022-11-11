@@ -1,27 +1,26 @@
-# https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
-WORKDIR /src
-
-# copy csproj and restore as distinct layers
-COPY NotWuphfAPI.Web/*.csproj .
-RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
-
-# copy everything else and build app
-COPY src/. .
-RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
-
-# final stage/image
-FROM mcr.microsoft.com/dotnet/runtime-deps:7.0-alpine-amd64
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-COPY --from=build /app .
-ENTRYPOINT ["./NotWuphfAPI.Web"]
+EXPOSE 5001
 
-# See: https://github.com/dotnet/announcements/issues/20
-# Uncomment to enable globalization APIs (or delete)
-ENV \
-     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
-     LC_ALL=en_US.UTF-8 \
-     LANG=en_US.UTF-8
- RUN apk add --no-cache \
-     icu-data-full \
-     icu-libs
+ENV ASPNETCORE_URLS=http://+:5001
+
+# Creates a non-root user with an explicit UID and adds permission to access the /app folder
+# For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
+RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
+USER appuser
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["NotWuphfAPI/NotWuphfAPI.Web/NotWuphfAPI.Web.csproj", "NotWuphfAPI/NotWuphfAPI.Web/"]
+RUN dotnet restore "NotWuphfAPI/NotWuphfAPI.Web/NotWuphfAPI.Web.csproj"
+COPY . .
+WORKDIR "/src/NotWuphfAPI/NotWuphfAPI.Web"
+RUN dotnet build "NotWuphfAPI.Web.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "NotWuphfAPI.Web.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "NotWuphfAPI.Web.dll"]
