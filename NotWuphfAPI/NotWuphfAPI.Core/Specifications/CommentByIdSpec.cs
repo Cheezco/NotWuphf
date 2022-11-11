@@ -10,10 +10,10 @@ namespace NotWuphfAPI.Core.Specifications
 {
     public class CommentByIdSpec : Specification<Comment>, ISingleResultSpecification<Comment>
     {
-        public CommentByIdSpec(int id)
+        public CommentByIdSpec(int groupId, int postId, int commentId)
         {
             Query
-                .Where(x => x.Id == id);
+                .Where(x => x.Post.Group.Id == groupId && x.Post.Id == postId && x.Id == commentId);
         }
     }
 }

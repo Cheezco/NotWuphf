@@ -1,8 +1,8 @@
-using Newtonsoft.Json.Serialization;
+using System.IdentityModel.Tokens.Jwt;
+using NotWuphfAPI.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddControllers();
 
@@ -10,12 +10,12 @@ NotWuphfAPI.Infrastructure.Dependencies.ConfigureServices(builder.Configuration,
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
+app.UseRouting();
+app.MapControllers();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+var dbSeeder = app.Services.CreateScope().ServiceProvider.GetRequiredService<AuthDbSeeder>();
+await dbSeeder.SeedAsync();
 
 app.Run();

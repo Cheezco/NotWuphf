@@ -1,15 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using NotWuphfAPI.Core.Auth.Model;
 
 namespace NotWuphfAPI.Core.Entities
 {
-    public class Comment : EntityBase
+    public class Comment : EntityBase, IUserOwnedResource
     {
         public string Content { get; set; }
+        
         public DateTime CreationDate { get; set; }
+        
+        public DateTime UpdateDate { get; set; }
+        
         public Post Post { get; set; }
+        
+        [Required]
+        public string UserId { get; set; }
+        
+        [DisplayName("Author")]
+        public WuphfUser User{ get; set;}
     }
 }

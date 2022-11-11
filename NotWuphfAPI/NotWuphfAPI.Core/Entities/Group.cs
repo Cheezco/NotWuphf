@@ -1,21 +1,30 @@
 ﻿using NotWuphfAPI.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using NotWuphfAPI.Core.Auth.Model;
 
 namespace NotWuphfAPI.Core.Entities
 {
-    public class Group : EntityBase
+    public class Group : EntityBase, IUserOwnedResource
     {
         public string Name { get; set; }
+        
         public string Description { get; set; }
+        
         public DateTime CreationDate { get; set; }
-        public DateTime LastPost { get; set; }
-        public List<User> Admins { get; set; }
-        public List<User> Users { get; set; }
+
+        public DateTime UpdateDate { get; set; }
+        
+        public List<WuphfUser> Members { get; set; }
+        
+        [Required]
+        public string UserId { get; set; }
+        
+        [DisplayName("Owner")]
+        public WuphfUser User { get; set; }
+
         public List<Post> Posts { get; set; }
+        
         public GroupVisibility Visibility { get; set; }
     }
 }
