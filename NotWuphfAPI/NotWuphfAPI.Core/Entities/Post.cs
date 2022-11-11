@@ -11,7 +11,8 @@ namespace NotWuphfAPI.Core.Entities
         public string Name { get; set; }
         public string Body { get; set; }
         public DateTime CreationDate { get; set; }
-        public Group Group { get; set; }
+
         public List<Comment> Comments { get; set; }
+        public Group Group { get; set; }
     }
 }
