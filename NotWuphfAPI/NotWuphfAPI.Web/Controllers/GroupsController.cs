@@ -48,13 +48,13 @@ namespace NotWuphfAPI.Web.Controllers
 
         [HttpPost]
         [Authorize(Roles = GroupRoles.GroupUser)]
-        public async Task<ActionResult<GroupDTO>> Create(CreateGroupDTO createGroupDTO)
+        public async Task<ActionResult<GroupDTO>> Create(CreateGroupDTO createGroupDto)
         {
             var group = new Group()
             {
-                Name = createGroupDTO.Name,
-                Description = createGroupDTO.Description,
-                Visibility = createGroupDTO.Visibility,
+                Name = createGroupDto.Name,
+                Description = createGroupDto.Description,
+                Visibility = createGroupDto.Visibility,
                 CreationDate = DateTime.UtcNow,
                 UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
@@ -66,9 +66,9 @@ namespace NotWuphfAPI.Web.Controllers
             return Created("", group.ToDTO());
         }
 
-        [HttpPut("{groupId}")]
+        [HttpPut("{groupId:int}")]
         [Authorize(Roles = GroupRoles.GroupUser)]
-        public async Task<ActionResult<GroupDTO>> Update(int groupId, UpdateGroupDTO updateGroupDTO)
+        public async Task<ActionResult<GroupDTO>> Update(int groupId, UpdateGroupDTO updateGroupDto)
         {
             var spec = new GroupByIdSpec(groupId);
             var group = await _groupsRepository.FirstOrDefaultAsync(spec);
@@ -82,16 +82,16 @@ namespace NotWuphfAPI.Web.Controllers
                 return Forbid();
             }
 
-            group.Name = updateGroupDTO.Name;
-            group.Description = updateGroupDTO.Description;
-            group.Visibility = updateGroupDTO.Visibility;
+            group.Name = updateGroupDto.Name;
+            group.Description = updateGroupDto.Description;
+            group.Visibility = updateGroupDto.Visibility;
 
             await _groupsRepository.UpdateAsync(group);
 
             return Ok(group.ToDTO());
         }
 
-        [HttpDelete("{groupId}")]
+        [HttpDelete("{groupId:int}")]
         [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId)
         {

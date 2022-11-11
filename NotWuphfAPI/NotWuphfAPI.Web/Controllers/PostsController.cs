@@ -12,7 +12,7 @@ using NotWuphfAPI.Infrastructure.Interfaces;
 
 namespace NotWuphfAPI.Web.Controllers
 {
-    [Route("api/groups/{groupId}/posts")]
+    [Route("api/groups/{groupId:int}/posts")]
     [ApiController]
     [Authorize(Roles = GroupRoles.GroupUser)]
     public class PostsController : ControllerBase
@@ -31,24 +31,16 @@ namespace NotWuphfAPI.Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PostDTO>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
-            var groupSpec = new GroupByIdSpec(groupId);
-
-            if (!await _groupsRepository.AnyAsync(groupSpec)) return NotFound();
-
             var spec = new PostsSpec(groupId, page, pageSize);
             var posts = await _postsRepository.ListAsync(spec);
 
             return posts.ToDTO();
         }
 
-        [HttpGet("{postId}")]
+        [HttpGet("{postId:int}")]
         public async Task<IActionResult> Get(int groupId, int postId)
         {
-            var groupSpec = new GroupByIdSpec(groupId);
-
-            if (!await _groupsRepository.AnyAsync(groupSpec)) return NotFound();
-
-            var spec = new PostByIdSpec(postId);
+            var spec = new PostByIdSpec(groupId, postId);
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
@@ -57,19 +49,19 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<PostDTO>> Create(int groupId, CreatePostDTO createPostDTO)
+        public async Task<ActionResult<PostDTO>> Create(int groupId, CreatePostDTO createPostDto)
         {
             var groupSpec = new GroupByIdSpec(groupId);
-            var group = await _groupsRepository.SingleOrDefaultAsync(groupSpec);
+            var groupExists = await _groupsRepository.AnyAsync(groupSpec);
 
-            if (group is null) return NotFound();
+            if(!groupExists) return NotFound();
 
             var post = new Post()
             {
-                Body = createPostDTO.Body,
-                Name = createPostDTO.Name,
+                Body = createPostDto.Body,
+                Name = createPostDto.Name,
                 CreationDate = DateTime.UtcNow,
-                Group = group,
+                GroupId = groupId,
                 UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
 
@@ -78,14 +70,10 @@ namespace NotWuphfAPI.Web.Controllers
             return Created("", post.ToDTO());
         }
 
-        [HttpPut("{postId}")]
-        public async Task<ActionResult<PostDTO>> Update(int groupId, int postId, UpdatePostDTO updatePostDTO)
+        [HttpPut("{postId:int}")]
+        public async Task<ActionResult<PostDTO>> Update(int groupId, int postId, UpdatePostDTO updatePostDto)
         {
-            var groupSpec = new GroupByIdSpec(groupId);
-
-            if (!await _groupsRepository.AnyAsync(groupSpec)) return NotFound();
-
-            var spec = new PostByIdSpec(postId);
+            var spec = new PostByIdSpec(groupId, postId);
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
@@ -97,21 +85,17 @@ namespace NotWuphfAPI.Web.Controllers
                 return Forbid();
             }
 
-            post.Body = updatePostDTO.Body;
+            post.Body = updatePostDto.Body;
 
             await _postsRepository.UpdateAsync(post);
 
             return Ok(post.ToDTO());
         }
 
-        [HttpDelete("{postId}")]
+        [HttpDelete("{postId:int}")]
         public async Task<ActionResult> Remove(int groupId, int postId)
         {
-            var groupSpec = new GroupByIdSpec(groupId);
-
-            if (!await _groupsRepository.AnyAsync(groupSpec)) return NotFound();
-
-            var spec = new PostByIdSpec(postId);
+            var spec = new PostByIdSpec(groupId, postId);
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
