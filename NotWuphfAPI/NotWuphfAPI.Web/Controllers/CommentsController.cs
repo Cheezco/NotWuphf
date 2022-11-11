@@ -1,4 +1,5 @@
 ﻿using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -28,11 +29,36 @@ namespace NotWuphfAPI.Web.Controllers
             _authorizationService = authorizationService;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetComments")]
         public async Task<ActionResult<IEnumerable<CommentDTO>>> GetMany(int groupId, int postId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new CommentsSpec(groupId, postId, page, pageSize);
             var comments = await _commentsRepository.ListAsync(spec);
+            
+            var totalCount = await _commentsRepository.CountAsync();
+            var totalPages = PaginationHelper.CalculateTotalPages(pageSize, totalCount);
+            var currentPage = PaginationHelper.GetCurrentPage(totalCount, page);
+            var fixedPageSize = PaginationHelper.CalculatePageSize(pageSize);
+
+            var previousPageLink = PaginationHelper.HasPreviousPage(totalPages, currentPage)
+                ? CreateResourceUri(currentPage, fixedPageSize,
+                    ResourceUriType.PreviousPage)
+                : null;
+            
+            var nextPageLink = PaginationHelper.HasNextPage(totalPages, currentPage) ?
+                CreateResourceUri(currentPage, fixedPageSize, ResourceUriType.NextPage) : null;
+            
+            var paginationMetadata = new
+            {
+                totalCount,
+                pageSize = fixedPageSize,
+                currentPage,
+                totalPages,
+                previousPageLink,
+                nextPageLink
+            };
+            
+            Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
             return comments.ToDTO();
         }
@@ -113,6 +139,28 @@ namespace NotWuphfAPI.Web.Controllers
             await _commentsRepository.DeleteAsync(comment);
 
             return NoContent();
+        }
+        
+        private string? CreateResourceUri(int page, int pageSize, ResourceUriType type)
+        {
+            return type switch
+            {
+                ResourceUriType.PreviousPage => Url.Link("GetComments", new
+                {
+                    page = page - 1,
+                    pageSize
+                }),
+                ResourceUriType.NextPage => Url.Link("GetComments", new
+                {
+                    page = page + 1,
+                    pageSize
+                }),
+                _ => Url.Link("GetTopics", new
+                {
+                    page,
+                    pageSize
+                })
+            };
         }
     }
 }

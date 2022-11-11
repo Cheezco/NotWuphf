@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotWuphfAPI.Core.Auth.Model;
@@ -25,11 +26,36 @@ namespace NotWuphfAPI.Web.Controllers
             _authorizationService = authorizationService;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetGroups")]
         public async Task<IEnumerable<GroupDTO>> GetMany(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var groupSpec = new GroupsSpec(page, pageSize);
             var groups = await _groupsRepository.ListAsync(groupSpec);
+
+            var totalCount = await _groupsRepository.CountAsync();
+            var totalPages = PaginationHelper.CalculateTotalPages(pageSize, totalCount);
+            var currentPage = PaginationHelper.GetCurrentPage(totalCount, page);
+            var fixedPageSize = PaginationHelper.CalculatePageSize(pageSize);
+
+            var previousPageLink = PaginationHelper.HasPreviousPage(totalPages, currentPage)
+                ? CreateResourceUri(currentPage, fixedPageSize,
+                    ResourceUriType.PreviousPage)
+                : null;
+            
+            var nextPageLink = PaginationHelper.HasNextPage(totalPages, currentPage) ?
+                CreateResourceUri(currentPage, fixedPageSize, ResourceUriType.NextPage) : null;
+            
+            var paginationMetadata = new
+            {
+                totalCount,
+                pageSize = fixedPageSize,
+                currentPage,
+                totalPages,
+                previousPageLink,
+                nextPageLink
+            };
+            
+            Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
             return groups.ToDTO();
         }
@@ -110,6 +136,28 @@ namespace NotWuphfAPI.Web.Controllers
             await _groupsRepository.DeleteAsync(group);
 
             return NoContent();
+        }
+
+        private string? CreateResourceUri(int page, int pageSize, ResourceUriType type)
+        {
+            return type switch
+            {
+                ResourceUriType.PreviousPage => Url.Link("GetGroups", new
+                {
+                    page = page - 1,
+                    pageSize
+                }),
+                ResourceUriType.NextPage => Url.Link("GetGroups", new
+                {
+                    page = page + 1,
+                    pageSize
+                }),
+                _ => Url.Link("GetTopics", new
+                {
+                    page,
+                    pageSize
+                })
+            };
         }
     }
 }
