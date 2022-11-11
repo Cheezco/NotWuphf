@@ -63,7 +63,7 @@ namespace NotWuphfAPI.Web.Controllers
             var spec = new GroupByIdSpec(groupId);
             var group = await _groupsRepository.FirstOrDefaultAsync(spec);
 
-            if (group is null) NotFound();
+            if (group is null) return NotFound();
 
             group.Name = updateGroupDTO.Name;
             group.Description = updateGroupDTO.Description;
