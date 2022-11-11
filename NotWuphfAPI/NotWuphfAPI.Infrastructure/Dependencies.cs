@@ -34,16 +34,14 @@ namespace NotWuphfAPI.Infrastructure
             }
             else
             {
-// #if DEBUG
-//                 services.AddDbContext<MainContext>(x =>
-//                      x.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=postgres"));
-// #endif
-// #if (!DEBUG)
-//                 services.AddDbContext<MainContext>(x =>
-//                     x.UseNpgsql(Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")));
-// #endif
+#if DEBUG
                 services.AddDbContext<MainContext>(x =>
-                    x.UseInMemoryDatabase("Main"));
+                     x.UseNpgsql(@"Host=localhost;Username=postgres;Password=root;Database=postgres"));
+#endif
+#if (!DEBUG)
+                services.AddDbContext<MainContext>(x =>
+                    x.UseNpgsql(Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")));
+#endif
             }
 
             services
