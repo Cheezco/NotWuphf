@@ -3,11 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 WORKDIR /source
 
 # copy csproj and restore as distinct layers
-COPY src/NotWuphfAPI.Web/*.csproj .
+COPY NotWuphf/NotWuphfAPI/NotWuphfAPI.Web/*.csproj .
 RUN dotnet restore -r linux-musl-x64 /p:PublishReadyToRun=true
 
 # copy everything else and build app
-COPY src/. .
+COPY NotWuphf/NotWuphfAPI/src/. .
 RUN dotnet publish -c Release -o /app -r linux-musl-x64 --self-contained true --no-restore /p:PublishReadyToRun=true /p:PublishSingleFile=true
 
 # final stage/image
