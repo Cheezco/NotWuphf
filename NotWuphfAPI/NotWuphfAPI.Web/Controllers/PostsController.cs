@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using NotWuphfAPI.Core.Auth.Model;
 using NotWuphfAPI.Core.DTO;
 using NotWuphfAPI.Core.Entities;
 using NotWuphfAPI.Core.Extensions;
@@ -11,15 +14,18 @@ namespace NotWuphfAPI.Web.Controllers
 {
     [Route("api/groups/{groupId}/posts")]
     [ApiController]
+    [Authorize(Roles = GroupRoles.GroupUser)]
     public class PostsController : ControllerBase
     {
         private readonly IRepository<Post> _postsRepository;
         private readonly IRepository<Group> _groupsRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public PostsController(IRepository<Post> postsRepository, IRepository<Group> groupsRepository)
+        public PostsController(IRepository<Post> postsRepository, IRepository<Group> groupsRepository, IAuthorizationService authorizationService)
         {
             _postsRepository = postsRepository;
             _groupsRepository = groupsRepository;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -63,7 +69,8 @@ namespace NotWuphfAPI.Web.Controllers
                 Body = createPostDTO.Body,
                 Name = createPostDTO.Name,
                 CreationDate = DateTime.UtcNow,
-                Group = group
+                Group = group,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
 
             await _postsRepository.AddAsync(post);
@@ -82,6 +89,13 @@ namespace NotWuphfAPI.Web.Controllers
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
+            
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
 
             post.Body = updatePostDTO.Body;
 
@@ -101,6 +115,13 @@ namespace NotWuphfAPI.Web.Controllers
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
+            
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
 
             await _postsRepository.DeleteAsync(post);
 

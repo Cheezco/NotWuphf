@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.JsonWebTokens;
+using NotWuphfAPI.Core.Auth.Model;
 using NotWuphfAPI.Core.DTO;
 using NotWuphfAPI.Core.Entities;
 using NotWuphfAPI.Core.Extensions;
@@ -11,17 +15,21 @@ namespace NotWuphfAPI.Web.Controllers
 {
     [Route("api/groups/{groupId}/posts/{postId}/comments")]
     [ApiController]
+    [Authorize(Roles = GroupRoles.GroupUser)]
     public class CommentsController : ControllerBase
     {
         private readonly IRepository<Post> _postsRepository;
         private readonly IRepository<Group> _groupsRepository;
         private readonly IRepository<Comment> _commentsRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public CommentsController(IRepository<Post> postsRepository, IRepository<Group> groupsRepository, IRepository<Comment> commentsRepository)
+        public CommentsController(IRepository<Post> postsRepository, IRepository<Group> groupsRepository,
+            IRepository<Comment> commentsRepository, IAuthorizationService authorizationService)
         {
             _postsRepository = postsRepository;
             _groupsRepository = groupsRepository;
             _commentsRepository = commentsRepository;
+            _authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -70,7 +78,8 @@ namespace NotWuphfAPI.Web.Controllers
             {
                 Content = createCommentDTO.Content,
                 CreationDate = DateTime.UtcNow,
-                Post = post
+                Post = post,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
 
             await _commentsRepository.AddAsync(comment);
@@ -90,6 +99,13 @@ namespace NotWuphfAPI.Web.Controllers
             if (!await _groupsRepository.AnyAsync(groupSpec)
                 || !await _postsRepository.AnyAsync(postSpec)
                 || comment is null) return NotFound();
+            
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
 
             comment.Content = updateCommentDTO.Content;
 
@@ -110,6 +126,13 @@ namespace NotWuphfAPI.Web.Controllers
             if (!await _groupsRepository.AnyAsync(groupSpec)
                 || !await _postsRepository.AnyAsync(postSpec)
                 || comment is null) return NotFound();
+            
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
 
             await _commentsRepository.DeleteAsync(comment);
 
