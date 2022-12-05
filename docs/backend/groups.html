@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Groups | NotWuphf documentation</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/assets/css/0.styles.73d0500b.css" as="style"><link rel="preload" href="/assets/js/app.fa5e3c5d.js" as="script"><link rel="preload" href="/assets/js/2.63c13255.js" as="script"><link rel="preload" href="/assets/js/14.bafeed31.js" as="script"><link rel="preload" href="/assets/js/8.574577dd.js" as="script"><link rel="preload" href="/assets/js/3.c1d18046.js" as="script"><link rel="preload" href="/assets/js/9.3958fe98.js" as="script"><link rel="preload" href="/assets/js/10.f5b8fc0e.js" as="script"><link rel="preload" href="/assets/js/7.82c7b1ca.js" as="script"><link rel="prefetch" href="/assets/js/11.5946fa9e.js"><link rel="prefetch" href="/assets/js/12.35ff8c89.js"><link rel="prefetch" href="/assets/js/13.91355496.js"><link rel="prefetch" href="/assets/js/15.fe9f47c3.js"><link rel="prefetch" href="/assets/js/16.717cf37a.js"><link rel="prefetch" href="/assets/js/4.94733d25.js"><link rel="prefetch" href="/assets/js/5.2ea06e07.js"><link rel="prefetch" href="/assets/js/6.8d81f0ec.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.73d0500b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">NotWuphf documentation</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/backend/" class="nav-link router-link-active">
+  Backend
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/backend/" class="nav-link router-link-active">
+  Backend
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>NotWuphf API</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/backend/" aria-current="page" class="sidebar-link">API Reference</a></li><li><a href="/backend/auth.html" class="sidebar-link">Auth</a></li><li><a href="/backend/groups.html" aria-current="page" class="active sidebar-link">Groups</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/backend/groups.html#get-groups" class="sidebar-link">Get groups</a></li><li class="sidebar-sub-header"><a href="/backend/groups.html#get-group" class="sidebar-link">Get group</a></li><li class="sidebar-sub-header"><a href="/backend/groups.html#create-group" class="sidebar-link">Create group</a></li><li class="sidebar-sub-header"><a href="/backend/groups.html#update-group" class="sidebar-link">Update group</a></li><li class="sidebar-sub-header"><a href="/backend/groups.html#delete-group" class="sidebar-link">Delete group</a></li></ul></li><li><a href="/backend/posts.html" class="sidebar-link">Posts</a></li><li><a href="/backend/comments.html" class="sidebar-link">Comments</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="groups"><a href="#groups" class="header-anchor">#</a> Groups</h1> <h2 id="get-groups"><a href="#get-groups" class="header-anchor">#</a> Get groups</h2> <p>Returns a list of groups.</p> <h3 id="url"><a href="#url" class="header-anchor">#</a> URL</h3> <hr> <span style="background:#1f6feb;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  GET
+</span> /api/groups
+<h3 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h3> <hr> <p>page <span class="badge tip" style="vertical-align:top;" data-v-15b7b770>optional</span></p> <p>Default value: 1</p> <hr> <p>pageSize <span class="badge tip" style="vertical-align:top;" data-v-15b7b770>optional</span></p> <p>Default value: 5</p> <h3 id="response"><a href="#response" class="header-anchor">#</a> Response</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">visibility</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">creationDate</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre></div><hr> <br> <hr> <br> <h2 id="get-group"><a href="#get-group" class="header-anchor">#</a> Get group</h2> <p>Returns a group, specified by the groupId parameter.</p> <h3 id="url-2"><a href="#url-2" class="header-anchor">#</a> URL</h3> <hr> <span style="background:#1f6feb;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  GET
+</span> /api/groups/:groupId
+<h3 id="parameters-2"><a href="#parameters-2" class="header-anchor">#</a> Parameters</h3> <hr> <p>groupId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <h3 id="response-2"><a href="#response-2" class="header-anchor">#</a> Response</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">visibility</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">creationDate</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><hr> <br> <hr> <br> <h2 id="create-group"><a href="#create-group" class="header-anchor">#</a> Create group</h2> <p>Creates a new group.</p> <h3 id="url-3"><a href="#url-3" class="header-anchor">#</a> URL</h3> <hr> <span style="background:green;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  POST
+</span> /api/groups/:groupId
+<h3 id="response-3"><a href="#response-3" class="header-anchor">#</a> Response</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">visibility</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">creationDate</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><hr> <br> <hr> <br> <h2 id="update-group"><a href="#update-group" class="header-anchor">#</a> Update group</h2> <p>Updates a group, specified by the groupId parameter.</p> <h3 id="url-4"><a href="#url-4" class="header-anchor">#</a> URL</h3> <hr> <span style="background:orange;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  PUT
+</span> /api/groups/:groupId
+<h3 id="parameters-3"><a href="#parameters-3" class="header-anchor">#</a> Parameters</h3> <hr> <p>groupId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <h3 id="response-4"><a href="#response-4" class="header-anchor">#</a> Response</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+    <span class="token literal-property property">id</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">name</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">description</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">visibility</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+    <span class="token literal-property property">creationDate</span><span class="token operator">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre></div><hr> <br> <hr> <br> <h2 id="delete-group"><a href="#delete-group" class="header-anchor">#</a> Delete group</h2> <p>Deletes a group, specified by the groupId parameter.</p> <h3 id="url-5"><a href="#url-5" class="header-anchor">#</a> URL</h3> <hr> <span style="background:#d9181b;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  DELETE
+</span> /api/groups/:groupId
+<h3 id="parameters-4"><a href="#parameters-4" class="header-anchor">#</a> Parameters</h3> <hr> <p>groupId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <hr></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/backend/auth.html" class="prev">
+        Auth
+      </a></span> <span class="next"><a href="/backend/posts.html">
+        Posts
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.fa5e3c5d.js" defer></script><script src="/assets/js/2.63c13255.js" defer></script><script src="/assets/js/14.bafeed31.js" defer></script><script src="/assets/js/8.574577dd.js" defer></script><script src="/assets/js/3.c1d18046.js" defer></script><script src="/assets/js/9.3958fe98.js" defer></script><script src="/assets/js/10.f5b8fc0e.js" defer></script><script src="/assets/js/7.82c7b1ca.js" defer></script>
+  </body>
+</html>

@@ -23,6 +23,12 @@ Returns a single group, specified by the groupId parameter.
 |---------|----------|---------------|
 | groupId | required |               |
 
+##### Response
+
+| Name | Type | Description |
+|------|------|-------------|
+| 
+
 #### `POST` api/groups
 
 Creates a new group.
@@ -35,6 +41,8 @@ Updates a single group, specified by the groupId parameter.
 |---------|----------|---------------|
 | groupId | required |               |
 
+
+
 #### `DELETE` api/groups/{groupId}
 
 Deletes a single group, specified by the groupId parameter.
@@ -42,6 +50,8 @@ Deletes a single group, specified by the groupId parameter.
 | Name    | Required | Default value |
 |---------|----------|---------------|
 | groupId | required |               |
+
+---
 
 ### Posts
 
@@ -91,6 +101,8 @@ Deletes a single post, specified by the postId parameter.
 |---------|----------|---------------|
 | groupId | required |               |
 | postId  | required |               |
+
+---
 
 ### Comments
 
@@ -145,6 +157,8 @@ Deletes a single comment, specified by the commentId parameter.
 | groupId   | required |               |
 | postId    | required |               |
 | commentId | required |               |
+
+---
 
 ### Auth
 
