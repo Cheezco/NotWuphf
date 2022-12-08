@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Group membership | NotWuphf documentation</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="">
+    <meta name="theme-color" content="#3eaf7c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="preload" href="/NotWuphf/assets/css/0.styles.e2742d63.css" as="style"><link rel="preload" href="/NotWuphf/assets/js/app.9691000d.js" as="script"><link rel="preload" href="/NotWuphf/assets/js/2.63c13255.js" as="script"><link rel="preload" href="/NotWuphf/assets/js/14.3238fd78.js" as="script"><link rel="preload" href="/NotWuphf/assets/js/9.1ebbca29.js" as="script"><link rel="preload" href="/NotWuphf/assets/js/3.97726657.js" as="script"><link rel="prefetch" href="/NotWuphf/assets/js/10.51b9cccb.js"><link rel="prefetch" href="/NotWuphf/assets/js/11.5946fa9e.js"><link rel="prefetch" href="/NotWuphf/assets/js/12.35ff8c89.js"><link rel="prefetch" href="/NotWuphf/assets/js/13.91355496.js"><link rel="prefetch" href="/NotWuphf/assets/js/15.067163e9.js"><link rel="prefetch" href="/NotWuphf/assets/js/16.d2e7b6bb.js"><link rel="prefetch" href="/NotWuphf/assets/js/17.b7cab800.js"><link rel="prefetch" href="/NotWuphf/assets/js/4.94733d25.js"><link rel="prefetch" href="/NotWuphf/assets/js/5.2ea06e07.js"><link rel="prefetch" href="/NotWuphf/assets/js/6.8d81f0ec.js"><link rel="prefetch" href="/NotWuphf/assets/js/7.9bda4fcb.js"><link rel="prefetch" href="/NotWuphf/assets/js/8.767917fa.js">
+    <link rel="stylesheet" href="/NotWuphf/assets/css/0.styles.e2742d63.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/NotWuphf/" class="home-link router-link-active"><!----> <span class="site-name">NotWuphf documentation</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/NotWuphf/backend/" class="nav-link router-link-active">
+  Backend
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/NotWuphf/backend/" class="nav-link router-link-active">
+  Backend
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>NotWuphf API</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/NotWuphf/backend/" aria-current="page" class="sidebar-link">API Reference</a></li><li><a href="/NotWuphf/backend/auth.html" class="sidebar-link">Auth</a></li><li><a href="/NotWuphf/backend/group-membership.html" aria-current="page" class="active sidebar-link">Group membership</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/NotWuphf/backend/group-membership.html#join-group" class="sidebar-link">Join group</a></li><li class="sidebar-sub-header"><a href="/NotWuphf/backend/group-membership.html#leave-group" class="sidebar-link">Leave group</a></li></ul></li><li><a href="/NotWuphf/backend/groups.html" class="sidebar-link">Groups</a></li><li><a href="/NotWuphf/backend/posts.html" class="sidebar-link">Posts</a></li><li><a href="/NotWuphf/backend/comments.html" class="sidebar-link">Comments</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="group-membership"><a href="#group-membership" class="header-anchor">#</a> Group membership</h1> <h2 id="join-group"><a href="#join-group" class="header-anchor">#</a> Join group</h2> <p>Add user to the group</p> <h3 id="url"><a href="#url" class="header-anchor">#</a> URL</h3> <hr> <span style="background:green;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  POST
+</span> /api/groups/:groupId/members/:userId/join
+<h3 id="parameters"><a href="#parameters" class="header-anchor">#</a> Parameters</h3> <hr> <p>groupId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <hr> <p>userId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <hr> <br> <hr> <br> <h1 id="group-membership-2"><a href="#group-membership-2" class="header-anchor">#</a> Group membership</h1> <h2 id="leave-group"><a href="#leave-group" class="header-anchor">#</a> Leave group</h2> <p>Removes user from the group</p> <h3 id="url-2"><a href="#url-2" class="header-anchor">#</a> URL</h3> <hr> <span style="background:green;border-radius:20px;padding-left:10px;padding-right:10px;line-height:22px;font-size:16px;color:white;width:fit-content;display:inline-block;">
+  POST
+</span> /api/groups/:groupId/members/:userId/leave
+<h3 id="parameters-2"><a href="#parameters-2" class="header-anchor">#</a> Parameters</h3> <hr> <p>groupId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p> <hr> <p>userId <span class="badge error" style="vertical-align:top;" data-v-15b7b770>required</span></p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/NotWuphf/backend/auth.html" class="prev">
+        Auth
+      </a></span> <span class="next"><a href="/NotWuphf/backend/groups.html">
+        Groups
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/NotWuphf/assets/js/app.9691000d.js" defer></script><script src="/NotWuphf/assets/js/2.63c13255.js" defer></script><script src="/NotWuphf/assets/js/14.3238fd78.js" defer></script><script src="/NotWuphf/assets/js/9.1ebbca29.js" defer></script><script src="/NotWuphf/assets/js/3.97726657.js" defer></script>
+  </body>
+</html>
