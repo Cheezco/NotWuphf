@@ -470,6 +470,8 @@ jspm_packages
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
+**/**/.idea/
+
 [Pp]ackages/
 
 Thumbs.db
