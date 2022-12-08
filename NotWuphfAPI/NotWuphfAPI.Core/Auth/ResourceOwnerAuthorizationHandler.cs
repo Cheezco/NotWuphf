@@ -10,7 +10,7 @@ public class ResourceOwnerAuthorizationHandler : AuthorizationHandler<ResourceOw
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
         ResourceOwnerRequirement requirement, IUserOwnedResource resource)
     {
-        if (context.User.IsInRole(GroupRoles.Admin) ||
+        if (context.User.IsInRole(Roles.Admin) ||
             context.User.FindFirstValue(JwtRegisteredClaimNames.Sub) == resource.UserId)
         {
             context.Succeed(requirement);

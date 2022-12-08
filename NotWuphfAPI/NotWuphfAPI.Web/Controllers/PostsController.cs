@@ -15,7 +15,7 @@ namespace NotWuphfAPI.Web.Controllers
 {
     [Route("api/groups/{groupId:int}/posts")]
     [ApiController]
-    [Authorize(Roles = GroupRoles.GroupUser)]
+    [Authorize(Roles = Roles.GroupUser)]
     public class PostsController : ControllerBase
     {
         private readonly IRepository<Post> _postsRepository;

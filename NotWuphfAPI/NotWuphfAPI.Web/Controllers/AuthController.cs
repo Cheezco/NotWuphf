@@ -46,7 +46,7 @@ namespace NotWuphfAPI.Web.Controllers
             if (!createUserResult.Succeeded)
                 return BadRequest("Could not create user.");
 
-            await _userManager.AddToRoleAsync(newUser, GroupRoles.GroupUser);
+            await _userManager.AddToRoleAsync(newUser, Roles.GroupUser);
 
             return CreatedAtAction(nameof(Register), newUser.ToDto());
         }

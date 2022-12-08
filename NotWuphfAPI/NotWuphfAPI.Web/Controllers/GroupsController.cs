@@ -73,7 +73,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = GroupRoles.GroupUser)]
+        [Authorize(Roles = Roles.GroupUser)]
         public async Task<ActionResult<GroupDto>> Create(CreateGroupDto createGroupDto)
         {
             var group = new Group()
@@ -93,7 +93,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPut("{groupId:int}")]
-        [Authorize(Roles = GroupRoles.GroupUser)]
+        [Authorize(Roles = Roles.GroupUser)]
         public async Task<ActionResult<GroupDto>> Update(int groupId, UpdateGroupDto updateGroupDto)
         {
             var spec = new GroupByIdSpec(groupId);
@@ -118,7 +118,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpDelete("{groupId:int}")]
-        [Authorize(Roles = GroupRoles.GroupUser)]
+        [Authorize(Roles = Roles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId)
         {
             var spec = new GroupByIdSpec(groupId);
