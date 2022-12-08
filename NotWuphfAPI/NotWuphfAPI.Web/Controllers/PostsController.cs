@@ -30,7 +30,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetPosts")]
-        public async Task<ActionResult<IEnumerable<PostDTO>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new PostsSpec(groupId, page, pageSize);
             var posts = await _postsRepository.ListAsync(spec);
@@ -60,7 +60,7 @@ namespace NotWuphfAPI.Web.Controllers
             
             Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-            return posts.ToDTO();
+            return posts.ToDto();
         }
 
         [HttpGet("{postId:int}")]
@@ -71,11 +71,11 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (post is null) return NotFound();
 
-            return Ok(post.ToDTO());
+            return Ok(post.ToDto());
         }
 
         [HttpPost]
-        public async Task<ActionResult<PostDTO>> Create(int groupId, CreatePostDTO createPostDto)
+        public async Task<ActionResult<PostDto>> Create(int groupId, CreatePostDto createPostDto)
         {
             var groupSpec = new GroupByIdSpec(groupId);
             var groupExists = await _groupsRepository.AnyAsync(groupSpec);
@@ -93,11 +93,11 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _postsRepository.AddAsync(post);
 
-            return Created("", post.ToDTO());
+            return Created("", post.ToDto());
         }
 
         [HttpPut("{postId:int}")]
-        public async Task<ActionResult<PostDTO>> Update(int groupId, int postId, UpdatePostDTO updatePostDto)
+        public async Task<ActionResult<PostDto>> Update(int groupId, int postId, UpdatePostDto updatePostDto)
         {
             var spec = new PostByIdSpec(groupId, postId);
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
@@ -115,7 +115,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _postsRepository.UpdateAsync(post);
 
-            return Ok(post.ToDTO());
+            return Ok(post.ToDto());
         }
 
         [HttpDelete("{postId:int}")]

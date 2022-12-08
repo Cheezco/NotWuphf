@@ -30,7 +30,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetComments")]
-        public async Task<ActionResult<IEnumerable<CommentDTO>>> GetMany(int groupId, int postId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        public async Task<ActionResult<IEnumerable<CommentDto>>> GetMany(int groupId, int postId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new CommentsSpec(groupId, postId, page, pageSize);
             var comments = await _commentsRepository.ListAsync(spec);
@@ -60,7 +60,7 @@ namespace NotWuphfAPI.Web.Controllers
             
             Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-            return comments.ToDTO();
+            return comments.ToDto();
         }
 
         [HttpGet("{commentId:int}")]
@@ -72,11 +72,11 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (comment is null) return NotFound();
 
-            return Ok(comment.ToDTO());
+            return Ok(comment.ToDto());
         }
 
         [HttpPost]
-        public async Task<ActionResult<CommentDTO>> Create(int groupId, int postId, CreateCommentDTO createCommentDto)
+        public async Task<ActionResult<CommentDto>> Create(int groupId, int postId, CreateCommentDto createCommentDto)
         {
             var postSpec = new PostByIdSpec(groupId, postId);
 
@@ -94,11 +94,11 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _commentsRepository.AddAsync(comment);
 
-            return Created("", comment.ToDTO());
+            return Created("", comment.ToDto());
         }
 
         [HttpPut("{commentId:int}")]
-        public async Task<ActionResult<CommentDTO>> Update(int groupId, int postId, int commentId, UpdateCommentDTO updateCommentDto)
+        public async Task<ActionResult<CommentDto>> Update(int groupId, int postId, int commentId, UpdateCommentDto updateCommentDto)
         {
             var spec = new CommentByIdSpec(groupId, postId, commentId);
 
@@ -117,7 +117,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _commentsRepository.UpdateAsync(comment);
 
-            return Ok(comment.ToDTO());
+            return Ok(comment.ToDto());
         }
 
         [HttpDelete("{commentId:int}")]

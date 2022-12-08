@@ -78,7 +78,7 @@ namespace NotWuphfAPI.Web.Controllers
             var posts = await _postsRepository.ListAsync();
             var comments = await _commentsRepository.ListAsync();
 
-            return Ok(new { Groups = groups.ToDTO(), Posts = posts.ToDTO(), Comments = comments.ToDTO() });
+            return Ok(new { Groups = groups.ToDto(), Posts = posts.ToDto(), Comments = comments.ToDto() });
         }
     }
 }
