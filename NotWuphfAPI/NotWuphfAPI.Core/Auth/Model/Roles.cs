@@ -3,7 +3,7 @@
 public static class Roles
 {
     public const string Admin = nameof(Admin);
-    public const string GroupUser = nameof(GroupUser);
+    public const string User = nameof(User);
 
-    public static readonly IReadOnlyCollection<string> All = new[] { Admin, GroupUser };
+    public static readonly IReadOnlyCollection<string> All = new[] { Admin, User };
 }

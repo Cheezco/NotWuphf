@@ -24,7 +24,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost("join")]
-        [Authorize(Roles = Roles.GroupUser)]
+        [Authorize(Roles = Roles.User)]
         public async Task<ActionResult> JoinGroup(int groupId, string memberId)
         {
             var spec = new GroupByIdWithMembersSpec(groupId);
@@ -56,7 +56,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost("leave")]
-        [Authorize(Roles = Roles.GroupUser)]
+        [Authorize(Roles = Roles.User)]
         public async Task<ActionResult> LeaveGroup(int groupId, string memberId)
         {
 
