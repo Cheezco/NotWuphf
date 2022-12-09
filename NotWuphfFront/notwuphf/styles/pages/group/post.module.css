@@ -1,0 +1,23 @@
+.post {
+  display: flex;
+  flex-flow: column;
+  color: white;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.5em;
+  border-radius: 5px;
+  padding: 1em;
+  width: 500px;
+}
+
+.postTitle {
+  font-size: 1.2em;
+}
+
+.commentButton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.commentText {
+  font-size: 0.7em;
+}

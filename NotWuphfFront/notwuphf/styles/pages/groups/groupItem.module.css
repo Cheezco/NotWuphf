@@ -1,0 +1,25 @@
+.groupItem {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  padding: 1.5em;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.groupItem:nth-child(2n) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.groupItem:first-child {
+  border-radius: 5px 5px 0 0;
+}
+
+.groupItem:last-child {
+  border-radius: 0 0 5px 5px;
+}
+
+.description {
+  font-size: 14px;
+}

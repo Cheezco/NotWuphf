@@ -1,0 +1,29 @@
+.navUserOuter {
+  padding: 0.8rem 1rem 0.8rem 1.8rem;
+  gap: 1rem;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(223, 223, 223);
+}
+
+.navUser {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navLogout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  padding: 0.7em;
+}
+
+.navLogout:hover {
+  background-color: rgba(54, 55, 58, 1);
+  transition: 0.25s all ease;
+}

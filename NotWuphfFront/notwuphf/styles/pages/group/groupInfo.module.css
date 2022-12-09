@@ -1,0 +1,16 @@
+.groupDataContainer {
+  display: flex;
+  flex-flow: column;
+  color: white;
+  padding: 1em;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title {
+  font-size: 25px;
+  text-align: center;
+}

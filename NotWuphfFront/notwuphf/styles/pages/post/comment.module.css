@@ -1,0 +1,14 @@
+.comment {
+  display: flex;
+  flex-flow: column;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+.commentMetadata {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  font-size: 0.9em;
+}

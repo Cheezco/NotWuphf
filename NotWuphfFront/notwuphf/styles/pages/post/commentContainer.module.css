@@ -1,0 +1,7 @@
+.commentContainer {
+  display: flex;
+  flex-flow: column;
+  padding: 1em;
+  gap: 0.5em;
+  color: white;
+}
