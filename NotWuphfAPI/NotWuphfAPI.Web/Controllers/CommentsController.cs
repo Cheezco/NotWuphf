@@ -15,7 +15,7 @@ namespace NotWuphfAPI.Web.Controllers
 {
     [Route("api/groups/{groupId:int}/posts/{postId:int}/comments")]
     [ApiController]
-    [Authorize(Roles = Roles.User)]
+    [Authorize(Roles = GroupRoles.GroupUser)]
     public class CommentsController : ControllerBase
     {
         private readonly IRepository<Post> _postsRepository;
@@ -30,6 +30,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetComments")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<IEnumerable<CommentDto>>> GetMany(int groupId, int postId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new CommentsSpec(groupId, postId, page, pageSize);
@@ -64,6 +65,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet("{commentId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IActionResult> Get(int groupId, int postId, int commentId)
         {
             var spec = new CommentByIdSpec(groupId, postId, commentId);
@@ -76,6 +78,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<CommentDto>> Create(int groupId, int postId, CreateCommentDto createCommentDto)
         {
             var postSpec = new PostByIdSpec(groupId, postId);
@@ -98,6 +101,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPut("{commentId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<CommentDto>> Update(int groupId, int postId, int commentId, UpdateCommentDto updateCommentDto)
         {
             var spec = new CommentByIdSpec(groupId, postId, commentId);
@@ -121,6 +125,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpDelete("{commentId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId, int postId, int commentId)
         {
             var spec = new CommentByIdSpec(groupId, postId, commentId);

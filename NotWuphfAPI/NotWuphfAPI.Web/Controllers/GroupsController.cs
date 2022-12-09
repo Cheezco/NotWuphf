@@ -27,6 +27,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetGroups")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IEnumerable<GroupDto>> GetMany(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var groupSpec = new GroupsSpec(page, pageSize);
@@ -61,6 +62,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet("{groupId}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IActionResult> Get(int groupId)
         {
             var spec = new GroupByIdSpec(groupId);
@@ -73,7 +75,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = Roles.User)]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<GroupDto>> Create(CreateGroupDto createGroupDto)
         {
             var group = new Group()
@@ -93,7 +95,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPut("{groupId:int}")]
-        [Authorize(Roles = Roles.User)]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<GroupDto>> Update(int groupId, UpdateGroupDto updateGroupDto)
         {
             var spec = new GroupByIdSpec(groupId);
@@ -101,7 +103,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (group is null) return NotFound();
 
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
@@ -118,7 +120,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpDelete("{groupId:int}")]
-        [Authorize(Roles = Roles.User)]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId)
         {
             var spec = new GroupByIdSpec(groupId);
@@ -126,7 +128,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (group is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {

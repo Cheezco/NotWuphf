@@ -34,14 +34,14 @@ public class AuthDbSeeder
             var createAdminUserResult = await _userManager.CreateAsync(newAdminUser, "!Password123");
             if (createAdminUserResult.Succeeded)
             {
-                await _userManager.AddToRolesAsync(newAdminUser, Roles.All);
+                await _userManager.AddToRolesAsync(newAdminUser, GroupRoles.All);
             }
         }
     }
 
     private async Task AddDefaultRoles()
     {
-        foreach (var role in Roles.All)
+        foreach (var role in GroupRoles.All)
         {
             var roleExists = await _roleManager.RoleExistsAsync(role);
             if (!roleExists)

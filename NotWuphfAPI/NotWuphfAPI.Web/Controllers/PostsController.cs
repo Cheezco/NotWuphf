@@ -15,7 +15,7 @@ namespace NotWuphfAPI.Web.Controllers
 {
     [Route("api/groups/{groupId:int}/posts")]
     [ApiController]
-    [Authorize(Roles = Roles.User)]
+    [Authorize(Roles = GroupRoles.GroupUser)]
     public class PostsController : ControllerBase
     {
         private readonly IRepository<Post> _postsRepository;
@@ -30,6 +30,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetPosts")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<IEnumerable<PostDto>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new PostsSpec(groupId, page, pageSize);
@@ -64,6 +65,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet("{postId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IActionResult> Get(int groupId, int postId)
         {
             var spec = new PostByIdSpec(groupId, postId);
@@ -75,6 +77,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<PostDto>> Create(int groupId, CreatePostDto createPostDto)
         {
             var groupSpec = new GroupByIdSpec(groupId);
@@ -97,6 +100,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpPut("{postId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult<PostDto>> Update(int groupId, int postId, UpdatePostDto updatePostDto)
         {
             var spec = new PostByIdSpec(groupId, postId);
@@ -104,7 +108,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (post is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
@@ -119,6 +123,7 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpDelete("{postId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId, int postId)
         {
             var spec = new PostByIdSpec(groupId, postId);
@@ -126,7 +131,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (post is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
