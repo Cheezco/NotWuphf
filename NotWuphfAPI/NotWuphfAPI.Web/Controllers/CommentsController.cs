@@ -110,7 +110,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (comment is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
@@ -134,7 +134,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (comment is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, comment, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
