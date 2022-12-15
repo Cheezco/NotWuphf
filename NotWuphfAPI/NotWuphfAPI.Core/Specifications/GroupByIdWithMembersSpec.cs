@@ -8,7 +8,6 @@ namespace NotWuphfAPI.Core.Specifications
         public GroupByIdWithMembersSpec(int id)
         {
             Query
-                .Include(x => x.Members)
                 .Where(x => x.Id == id);
         }
     }

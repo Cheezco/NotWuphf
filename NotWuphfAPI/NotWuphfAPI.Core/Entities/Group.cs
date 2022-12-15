@@ -14,9 +14,7 @@ namespace NotWuphfAPI.Core.Entities
         public DateTime CreationDate { get; set; }
 
         public DateTime UpdateDate { get; set; }
-        
-        public List<WuphfUser> Members { get; set; }
-        
+
         [Required]
         public string UserId { get; set; }
 

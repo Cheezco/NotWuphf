@@ -22,21 +22,6 @@ namespace NotWuphfAPI.Infrastructure.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("GroupWuphfUser", b =>
-                {
-                    b.Property<int>("GroupsId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("MembersId")
-                        .HasColumnType("text");
-
-                    b.HasKey("GroupsId", "MembersId");
-
-                    b.HasIndex("MembersId");
-
-                    b.ToTable("GroupWuphfUser");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -339,21 +324,6 @@ namespace NotWuphfAPI.Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("GroupWuphfUser", b =>
-                {
-                    b.HasOne("NotWuphfAPI.Core.Entities.Group", null)
-                        .WithMany()
-                        .HasForeignKey("GroupsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NotWuphfAPI.Core.Auth.Model.WuphfUser", null)
-                        .WithMany()
-                        .HasForeignKey("MembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -9,7 +9,6 @@ namespace NotWuphfAPI.Core.Specifications
         public GroupMembersSpec(int id)
         {
             Query
-                .Select(x => x.Members)
                 .Where(x => x.Id == id);
         }
     }
