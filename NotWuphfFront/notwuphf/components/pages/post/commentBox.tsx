@@ -1,11 +1,11 @@
 import styles from "styles/pages/post/commentBox.module.css";
 import { Textarea } from "@chakra-ui/react";
-import Button from "../../../shared/components/button";
+import WuphfButton from "../../../shared/components/WuphfButton";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { createComment } from "@lib/comments";
+import { createComment } from "../../../lib/comments";
 import { useSession } from "next-auth/react";
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../../../types/WuphfUser";
 
 export default function CommentBox() {
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function CommentBox() {
       />
       <br />
       <div className={styles.button}>
-        <Button>Comment</Button>
+        <WuphfButton>Comment</WuphfButton>
       </div>
     </form>
   );

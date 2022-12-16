@@ -2,18 +2,21 @@ import styles from "styles/pages/group/[groupId].module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { GroupInfo, PostContainer } from "@components/pages/group/groupExports";
-import { getGroup } from "@lib/groups";
-import { getPosts } from "@lib/posts";
-import BackButton from "@shared/components/backButton";
-import ContentPanel from "@shared/components/contentPanel";
-import MainLayout from "@shared/components/layouts/mainLayout";
-import MainPanel from "@shared/components/mainPanel";
+import {
+  GroupInfo,
+  PostContainer,
+} from "../../../components/pages/group/groupExports";
+import { getGroup } from "../../../lib/groups";
+import { getPosts } from "../../../lib/posts";
+import BackButton from "../../../shared/components/WuphfBackButton";
+import ContentPanel from "../../../shared/components/contentPanel";
+import MainLayout from "../../../shared/components/layouts/mainLayout";
+import MainPanel from "../../../shared/components/mainPanel";
 import { GroupData } from "../../../types/data/groupInterfaces";
 import { PostData } from "../../../types/data/postInterfaces";
 import WuphfUser from "../../../types/WuphfUser";
-import Pagination from "@shared/components/pagination";
-import CreatePostPanel from "@components/pages/group/createPostPanel";
+import Pagination from "../../../shared/components/pagination";
+import CreatePostPanel from "../../../components/pages/group/createPostPanel";
 
 export default function Group() {
   const router = useRouter();

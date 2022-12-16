@@ -1,7 +1,7 @@
 import styles from "styles/shared/components/Button.module.css";
 import { ReactElement, ReactFragment } from "react";
 
-export default function Button({
+export default function WuphfButton({
   children,
   onClick,
   type,

@@ -1,7 +1,7 @@
 import styles from "styles/pages/register/register.module.css";
 import { useState } from "react";
 import { Input } from "@chakra-ui/react";
-import Button from "../shared/components/button";
+import WuphfButton from "../shared/components/WuphfButton";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -26,7 +26,7 @@ export default function Register() {
             <Input type="password" className={styles.input} />
           </div>
           <br />
-          <Button>Register</Button>
+          <WuphfButton>Register</WuphfButton>
         </form>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import PaginationHeader from "types/data/headerInterfaces";
+import PaginationHeader from "../types/data/headerInterfaces";
 import {
   CreatePost,
   PostData,

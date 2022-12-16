@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import styles from "styles/pages/index/index.module.css";
-import Button from "../shared/components/button";
+import WuphfButton from "../shared/components/WuphfButton";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
 
@@ -20,14 +20,14 @@ export default function Home() {
       <div className={styles.panel}>
         <h1 className={styles.title}>NotWuphf</h1>
         <div className={styles.buttonContainer}>
-          <Button onClick={() => signIn()}>Login</Button>
-          <Button
+          <WuphfButton onClick={() => signIn()}>Login</WuphfButton>
+          <WuphfButton
             onClick={() => {
               router.push("register");
             }}
           >
             Register
-          </Button>
+          </WuphfButton>
         </div>
       </div>
     </div>

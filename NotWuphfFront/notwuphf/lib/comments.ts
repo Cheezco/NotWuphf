@@ -3,8 +3,8 @@ import {
   Comments,
   CreateComment,
   UpdateComment,
-} from "types/data/commentInterfaces";
-import PaginationHeader from "types/data/headerInterfaces";
+} from "../types/data/commentInterfaces";
+import PaginationHeader from "../types/data/headerInterfaces";
 
 const api = "/api/groups";
 

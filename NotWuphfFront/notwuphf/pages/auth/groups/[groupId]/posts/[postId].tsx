@@ -1,5 +1,5 @@
 import styles from "styles/pages/post/[postId].module.css";
-import BackButton from "../../../../../shared/components/backButton";
+import BackButton from "../../../../../shared/components/WuphfBackButton";
 import MainLayout from "../../../../../shared/components/layouts/mainLayout";
 import MainPanel from "../../../../../shared/components/mainPanel";
 import { useEffect, useState } from "react";
@@ -11,10 +11,10 @@ import {
 } from "../../../../../components/pages/post/postExports";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import WuphfUser from "types/WuphfUser";
-import { getPost } from "@lib/posts";
-import { getComments } from "@lib/comments";
-import Pagination from "@shared/components/pagination";
+import WuphfUser from "../../../../../types/WuphfUser";
+import { getPost } from "../../../../../lib/posts";
+import { getComments } from "../../../../../lib/comments";
+import Pagination from "../../../../../shared/components/pagination";
 
 export default function Post() {
   const router = useRouter();

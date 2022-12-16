@@ -13,9 +13,9 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import WuphfUser from "types/WuphfUser";
-import { createPost } from "@lib/posts";
-import Button from "@shared/components/button";
+import WuphfUser from "../../../types/WuphfUser";
+import { createPost } from "../../../lib/posts";
+import WuphfButton from "../../../shared/components/WuphfButton";
 
 export default function CreatePostPanel() {
   const { data: session } = useSession();
@@ -49,7 +49,7 @@ export default function CreatePostPanel() {
 
   return (
     <div className={styles.container}>
-      <Button onClick={onOpen}>Create post</Button>
+      <WuphfButton onClick={onOpen}>Create post</WuphfButton>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -64,7 +64,7 @@ export default function CreatePostPanel() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleButtonClick}>Create</Button>
+            <WuphfButton onClick={handleButtonClick}>Create</WuphfButton>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -7,8 +7,8 @@ import WuphfUser from "../../types/WuphfUser";
 import { GroupData } from "../../types/data/groupInterfaces";
 import { useEffect, useState } from "react";
 import { getGroups } from "../../lib/groups";
-import Pagination from "@shared/components/pagination";
-import CreateGroupPanel from "@components/pages/groups/createGroupPanel";
+import Pagination from "../../shared/components/pagination";
+import CreateGroupPanel from "../../components/pages/groups/createGroupPanel";
 
 export default function Groups() {
   const { data: session } = useSession();
