@@ -1,5 +1,5 @@
 import styles from "styles/pages/post/[postId].module.css";
-import BackButton from "../../../../../shared/components/backButton";
+import BackButton from "../../../../../shared/components/WuphfBackButton";
 import MainLayout from "../../../../../shared/components/layouts/mainLayout";
 import MainPanel from "../../../../../shared/components/mainPanel";
 import { useEffect, useState } from "react";

@@ -8,7 +8,7 @@ import {
 } from "../../../components/pages/group/groupExports";
 import { getGroup } from "../../../lib/groups";
 import { getPosts } from "../../../lib/posts";
-import BackButton from "../../../shared/components/backButton";
+import BackButton from "../../../shared/components/WuphfBackButton";
 import ContentPanel from "../../../shared/components/contentPanel";
 import MainLayout from "../../../shared/components/layouts/mainLayout";
 import MainPanel from "../../../shared/components/mainPanel";
