@@ -7,7 +7,7 @@ export default function NavUser() {
   return (
     <div className={styles.navUserOuter}>
       <div className={styles.navUser}>
-        <text>Username</text>
+        <div>Username</div>
       </div>
       <button className={styles.navLogout} onClick={() => signOut()}>
         <Icon fontSize="22px" as={FiLogOut} />
