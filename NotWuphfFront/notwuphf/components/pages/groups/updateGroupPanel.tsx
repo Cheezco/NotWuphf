@@ -20,15 +20,17 @@ import { GroupData } from "../../../types/data/groupInterfaces";
 
 export default function UpdateGroupPanel({
   groupData,
+  refreshData,
 }: {
   groupData: GroupData;
+  refreshData: () => void;
 }) {
   const { data: session } = useSession();
   const router = useRouter();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [name, setName] = useState(groupData.name);
-  const [description, setDescription] = useState(groupData.description);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleDescriptionChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -51,7 +53,11 @@ export default function UpdateGroupPanel({
       groupData.id.toString(),
       user.token
     );
-    router.reload();
+    setName("");
+    setDescription("");
+    onClose();
+    refreshData();
+    // router.reload();
   };
 
   return (

@@ -11,22 +11,22 @@ import UpdateGroupPanel from "./updateGroupPanel";
 export default function GroupItem({
   groupData,
   router,
+  refreshData,
 }: {
   groupData?: GroupData;
   router: NextRouter;
+  refreshData: () => void;
 }) {
   const { data: session } = useSession();
 
-  const handleDeleteClick = () => {
-    const deleteRequest = async () => {
-      if (!session || !session.user || !groupData) return;
+  const handleDeleteClick = async () => {
+    if (!session || !session.user || !groupData) return;
 
-      const user = session.user as WuphfUser;
-      await deleteGroup(groupData.id.toString(), user.token);
-    };
+    const user = session.user as WuphfUser;
+    await deleteGroup(groupData.id.toString(), user.token);
 
-    deleteRequest();
-    router.reload();
+    refreshData();
+    // router.reload();
   };
 
   return (
@@ -44,7 +44,7 @@ export default function GroupItem({
             <WuphfButton onClick={handleDeleteClick}>
               <div className={styles.buttonText}>Delete</div>
             </WuphfButton>
-            <UpdateGroupPanel groupData={groupData} />
+            <UpdateGroupPanel groupData={groupData} refreshData={refreshData} />
           </>
         )}
       </div>
