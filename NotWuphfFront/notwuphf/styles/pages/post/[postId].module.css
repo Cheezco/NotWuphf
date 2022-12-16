@@ -10,6 +10,12 @@
   font-size: 1.2em;
 }
 
+.backButton {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
 .input {
   min-height: 150px !important;
 }
