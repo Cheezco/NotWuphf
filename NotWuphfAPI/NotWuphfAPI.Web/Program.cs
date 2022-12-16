@@ -23,4 +23,6 @@ dbContext.Database.Migrate();
 var dbSeeder = app.Services.CreateScope().ServiceProvider.GetRequiredService<AuthDbSeeder>();
 await dbSeeder.SeedAsync();
 
+app.UseCors("AllowAll");
+
 app.Run();

@@ -51,6 +51,17 @@ namespace NotWuphfAPI.Infrastructure
                 //.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationHandler>()
                 .AddSingleton<IAuthorizationHandler, GroupOwnerAuthorizationHandler>();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", x =>
+                {
+                    x.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("Pagination");
+                });
+            });
+
             services.AddAuthorization(options =>
             {
                 // options.AddPolicy(PolicyNames.ResourceOwner,
