@@ -17,6 +17,7 @@ import { PostData } from "../../../types/data/postInterfaces";
 import WuphfUser from "../../../types/WuphfUser";
 import Pagination from "../../../shared/components/pagination";
 import CreatePostPanel from "../../../components/pages/group/createPostPanel";
+import { GetServerSideProps } from "next";
 
 export default function Group() {
   const router = useRouter();
@@ -71,3 +72,7 @@ export default function Group() {
     </MainLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {} };
+};
