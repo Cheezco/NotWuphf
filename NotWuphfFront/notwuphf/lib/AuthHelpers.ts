@@ -11,7 +11,7 @@ function isAdmin(user: WuphfUser) {
 
 function getRoles(user: WuphfUser): string[] {
   if (typeof user === "undefined" || typeof user.role === "undefined")
-    return [];
+    return ["GroupUser"];
 
   if (typeof user.role === "string") {
     return [user.role];
