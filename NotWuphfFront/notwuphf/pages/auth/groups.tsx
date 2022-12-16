@@ -25,7 +25,7 @@ export default function Groups() {
       const data = await getGroups(user.token, currentPage + 1);
 
       setGroups(data.groups);
-      setPageCount(Math.ceil(data.count / 5));
+      setPageCount(data.count);
     };
 
     fetchData();

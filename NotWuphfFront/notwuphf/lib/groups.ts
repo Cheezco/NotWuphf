@@ -25,7 +25,7 @@ async function getGroups(token: string, page: number): Promise<Groups> {
 
   if (paginationHeader) {
     let pagination = JSON.parse(paginationHeader) as PaginationHeader;
-    count = pagination.totalCount;
+    count = pagination.totalPages;
   }
 
   if (!res.ok) {

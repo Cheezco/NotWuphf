@@ -6,6 +6,7 @@ import styles from "styles/pages/group/post.module.css";
 import WuphfUser from "../../../types/WuphfUser";
 import WuphfButton from "../../../shared/components/WuphfButton";
 import { PostData } from "../../../types/data/postInterfaces";
+import UpdatePostPanel from "./updatePostPanel";
 
 export default function Post({
   postData,
@@ -14,7 +15,7 @@ export default function Post({
 }: {
   postData?: PostData;
   router: NextRouter;
-  groupId?: Number;
+  groupId?: number;
 }) {
   const { data: session } = useSession();
 
@@ -32,10 +33,13 @@ export default function Post({
       <br />
       <div>{postData?.body}</div>
       <div className={styles.buttons}>
-        {isAdmin(session?.user as WuphfUser) && (
-          <WuphfButton onClick={handleDeleteClick}>
-            <div className={styles.commentText}>Delete</div>
-          </WuphfButton>
+        {isAdmin(session?.user as WuphfUser) && groupId && postData && (
+          <>
+            <WuphfButton onClick={handleDeleteClick}>
+              <div className={styles.commentText}>Delete</div>
+            </WuphfButton>
+            <UpdatePostPanel groupId={groupId} postData={postData} />
+          </>
         )}
         <WuphfButton
           onClick={() =>

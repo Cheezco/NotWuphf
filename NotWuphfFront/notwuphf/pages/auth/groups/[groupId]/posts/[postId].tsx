@@ -47,7 +47,7 @@ export default function Post() {
         currentPage + 1
       );
       setComments(commentData.comments);
-      setPageCount(Math.ceil(commentData.count / 5));
+      setPageCount(commentData.count);
 
       if (typeof post === "undefined") {
         const postData = await getPost(groupId, postId, user.token);

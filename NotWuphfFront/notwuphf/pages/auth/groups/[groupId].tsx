@@ -40,7 +40,7 @@ export default function Group() {
       }
       const postData = await getPosts(groupId, user.token, currentPage + 1);
       setPosts(postData.posts);
-      setPageCount(Math.ceil(postData.count / 5));
+      setPageCount(Math.ceil(postData.count));
     };
 
     fetchData();
