@@ -1,10 +1,11 @@
 import styles from "styles/shared/components/mainLayout/mainLayout.module.css";
 import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextRouter, useRouter } from "next/router";
 import Nav from "../../../components/layouts/mainLayout/nav";
 import { NavItemData } from "../../../types/mainLayout/navTypes";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { useSession } from "next-auth/react";
 
 export default function MainLayout({
   children,
@@ -104,7 +105,7 @@ function MobileLayout({
   categoriesToDisplay: string[];
   onNavItemClick: (index: number, navItems: NavItemData[]) => void;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleOverlayClick = () => {
     setIsOpen(false);
