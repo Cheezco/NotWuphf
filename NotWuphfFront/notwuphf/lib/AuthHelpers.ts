@@ -20,4 +20,4 @@ function getRoles(user: WuphfUser): string[] {
   return user.role;
 }
 
-export { isAdmin };
+export { isAdmin, getRoles };
