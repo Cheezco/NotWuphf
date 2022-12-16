@@ -8,7 +8,7 @@ export default function PostContainer({
   groupId,
 }: {
   posts?: PostData[];
-  groupId?: Number;
+  groupId?: number;
 }) {
   const router = useRouter();
 
