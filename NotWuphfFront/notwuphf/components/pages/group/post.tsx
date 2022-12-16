@@ -1,9 +1,9 @@
-import { isAdmin } from "@lib/AuthHelpers";
-import { deletePost } from "@lib/posts";
+import { isAdmin } from "../../../lib/AuthHelpers";
+import { deletePost } from "../../../lib/posts";
 import { useSession } from "next-auth/react";
 import { NextRouter, useRouter } from "next/router";
 import styles from "styles/pages/group/post.module.css";
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../../../types/WuphfUser";
 import WuphfButton from "../../../shared/components/WuphfButton";
 import { PostData } from "../../../types/data/postInterfaces";
 

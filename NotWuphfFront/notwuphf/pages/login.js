@@ -1,6 +1,6 @@
 import styles from "styles/pages/login/login.module.css";
 import { Input } from "@chakra-ui/react";
-import Button from "../shared/components/Button";
+import Button from "../shared/components/WuphfButton";
 import { getCsrfToken } from "next-auth/react";
 
 export default function Login({ csrfToken }) {

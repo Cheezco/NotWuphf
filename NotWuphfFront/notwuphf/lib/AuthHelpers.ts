@@ -1,4 +1,4 @@
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../types/WuphfUser";
 
 function isAdmin(user: WuphfUser) {
   if (typeof user === "undefined") return false;

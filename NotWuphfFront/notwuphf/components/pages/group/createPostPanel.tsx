@@ -13,9 +13,9 @@ import {
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import WuphfUser from "types/WuphfUser";
-import { createPost } from "@lib/posts";
-import WuphfButton from "@shared/components/WuphfButton";
+import WuphfUser from "../../../types/WuphfUser";
+import { createPost } from "../../../lib/posts";
+import WuphfButton from "../../../shared/components/WuphfButton";
 
 export default function CreatePostPanel() {
   const { data: session } = useSession();

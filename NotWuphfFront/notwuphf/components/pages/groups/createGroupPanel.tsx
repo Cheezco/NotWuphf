@@ -9,13 +9,13 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { createGroup } from "@lib/groups";
-import WuphfButton from "@shared/components/WuphfButton";
+import { createGroup } from "../../../lib/groups";
+import WuphfButton from "../../../shared/components/WuphfButton";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styles from "styles/pages/groups/createGroupPanel.module.css";
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../../../types/WuphfUser";
 
 export default function CreateGroupPanel() {
   const { data: session } = useSession();

@@ -3,9 +3,9 @@ import { Textarea } from "@chakra-ui/react";
 import WuphfButton from "../../../shared/components/WuphfButton";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { createComment } from "@lib/comments";
+import { createComment } from "../../../lib/comments";
 import { useSession } from "next-auth/react";
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../../../types/WuphfUser";
 
 export default function CommentBox() {
   const router = useRouter();

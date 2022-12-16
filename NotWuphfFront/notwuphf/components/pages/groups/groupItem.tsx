@@ -1,9 +1,9 @@
-import { isAdmin } from "@lib/AuthHelpers";
-import { deleteGroup } from "@lib/groups";
+import { isAdmin } from "../../../lib/AuthHelpers";
+import { deleteGroup } from "../../../lib/groups";
 import { useSession } from "next-auth/react";
 import { NextRouter } from "next/router";
 import styles from "styles/pages/groups/groupItem.module.css";
-import WuphfUser from "types/WuphfUser";
+import WuphfUser from "../../../types/WuphfUser";
 import WuphfButton from "../../../shared/components/WuphfButton";
 import { GroupData } from "../../../types/data/groupInterfaces";
 
