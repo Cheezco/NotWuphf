@@ -1,12 +1,10 @@
 import styles from "styles/shared/components/mainLayout/nav/nav.module.css";
 import React from "react";
-import { FiHome, FiTrello, FiBookOpen } from "react-icons/fi";
 import { NextRouter } from "next/router";
 import {
   NavItemCategory,
   NavItemData,
 } from "../../../types/mainLayout/navTypes";
-import { RiGroupLine } from "react-icons/ri";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import {
   NavUser,
@@ -61,7 +59,6 @@ function getNavItemCategories(
   categoriesToInclude?: string[]
 ): NavItemCategory[] {
   const authPrefix = "/auth/";
-  const adminPrefix = authPrefix + "admin/";
 
   let allCategories = [
     {
@@ -73,39 +70,12 @@ function getNavItemCategories(
           href: authPrefix + "groups",
           icon: AiOutlineUsergroupAdd,
         },
-        {
-          text: "My Groups",
-          href: authPrefix + "my-groups",
-          icon: RiGroupLine,
-        },
       ],
     },
     {
       name: "admin",
       text: "Administratoriaus puslapiai",
-      items: [
-        {
-          text: "Vartotojai",
-          category: "admin",
-          categoryText: "Administratoriaus puslapiai",
-          href: adminPrefix + "users",
-          icon: FiHome,
-        },
-        {
-          text: "Statistika",
-          category: "admin",
-          categoryText: "Administratoriaus puslapiai",
-          href: adminPrefix + "users",
-          icon: FiTrello,
-        },
-        {
-          text: "Vartojojų Pranešimai",
-          category: "admin",
-          categoryText: "Administratoriaus puslapiai",
-          href: adminPrefix + "users",
-          icon: FiBookOpen,
-        },
-      ],
+      items: [],
     },
   ];
 
