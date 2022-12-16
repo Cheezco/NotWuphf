@@ -33,20 +33,6 @@ export default function MainLayout({
   }, [session, router]);
 
   return (
-    // <DesktopLayout
-    //   router={router}
-    //   categoriesToDisplay={categoriesToDisplay}
-    //   onNavItemClick={onNavItemClick}
-    // >
-    //   {children}
-    // </DesktopLayout>
-    // <MobileLayout
-    //   router={router}
-    //   categoriesToDisplay={categoriesToDisplay}
-    //   onNavItemClick={onNavItemClick}
-    // >
-    //   {children}
-    // </MobileLayout>
     <>
       {!isMobile ? (
         <DesktopLayout
