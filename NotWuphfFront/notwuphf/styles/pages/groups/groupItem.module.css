@@ -23,3 +23,19 @@
 .description {
   font-size: 14px;
 }
+
+@media only screen and (max-width: 786px) {
+  .groupItem {
+    flex-flow: column;
+    gap: 1.5em;
+    min-width: 300px;
+  }
+
+  .buttonText {
+    font-size: 18px;
+  }
+
+  .name {
+    font-size: 1.5em;
+  }
+}

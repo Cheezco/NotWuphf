@@ -15,8 +15,9 @@ export default function CommentContainer({
           return (
             <Comment
               key={index}
+              id={x.id.toString()}
               author={x.author}
-              date={x.creationDate.toDateString()}
+              date={new Date(x.creationDate).toLocaleDateString()}
               comment={x.content}
             />
           );

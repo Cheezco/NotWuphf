@@ -5,10 +5,13 @@ export interface CommentData {
   author: string;
 }
 
+export interface Comments {
+  comments: CommentData[];
+  count: number;
+}
+
 export interface CreateComment {
-  id: Number;
   content: string;
-  creationDate: Date;
 }
 
 export interface UpdateComment {

@@ -18,3 +18,16 @@
   border: 1px solid #6609c3 !important;
   box-shadow: 0 0 0 1px #6609c3 !important;
 }
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 786px) {
+  .backButton {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

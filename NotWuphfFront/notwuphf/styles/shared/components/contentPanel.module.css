@@ -1,7 +1,10 @@
 .panel {
   display: flex;
+  flex-flow: column;
   justify-content: center;
+  align-items: center;
   width: fit-content;
+  max-width: 1200px;
   background-color: rgb(54, 57, 63);
   box-shadow: 0 50px 70px -20px rgba(0, 0, 0, 0.85);
   border-radius: 5px;
@@ -11,4 +14,11 @@
   display: flex;
   width: 100%;
   justify-content: center;
+}
+
+@media only screen and (max-width: 786px) {
+  .panel {
+    min-width: 300px;
+    width: 100%;
+  }
 }

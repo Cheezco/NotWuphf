@@ -1,9 +1,10 @@
 import styles from "styles/shared/components/mainLayout/mainLayout.module.css";
-import { Grid, GridItem } from "@chakra-ui/react";
-import React from "react";
-import { useRouter } from "next/router";
+import { Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { NextRouter, useRouter } from "next/router";
 import Nav from "../../../components/layouts/mainLayout/nav";
 import { NavItemData } from "../../../types/mainLayout/navTypes";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function MainLayout({
   children,
@@ -17,7 +18,59 @@ export default function MainLayout({
     router.push(navItems[index].href);
   };
   let categoriesToDisplay = ["user"];
+  const [isMobile] = useMediaQuery("(max-width:786px", {
+    ssr: true,
+    fallback: false,
+  });
 
+  return (
+    // <DesktopLayout
+    //   router={router}
+    //   categoriesToDisplay={categoriesToDisplay}
+    //   onNavItemClick={onNavItemClick}
+    // >
+    //   {children}
+    // </DesktopLayout>
+    // <MobileLayout
+    //   router={router}
+    //   categoriesToDisplay={categoriesToDisplay}
+    //   onNavItemClick={onNavItemClick}
+    // >
+    //   {children}
+    // </MobileLayout>
+    <>
+      {!isMobile ? (
+        <DesktopLayout
+          router={router}
+          categoriesToDisplay={categoriesToDisplay}
+          onNavItemClick={onNavItemClick}
+        >
+          {children}
+        </DesktopLayout>
+      ) : (
+        <MobileLayout
+          router={router}
+          categoriesToDisplay={categoriesToDisplay}
+          onNavItemClick={onNavItemClick}
+        >
+          {children}
+        </MobileLayout>
+      )}
+    </>
+  );
+}
+
+function DesktopLayout({
+  children,
+  router,
+  categoriesToDisplay,
+  onNavItemClick,
+}: {
+  children: React.ReactNode;
+  router: NextRouter;
+  categoriesToDisplay: string[];
+  onNavItemClick: (index: number, navItems: NavItemData[]) => void;
+}) {
   return (
     <Grid
       templateAreas={`"nav main"`}
@@ -37,5 +90,52 @@ export default function MainLayout({
         {children}
       </GridItem>
     </Grid>
+  );
+}
+
+function MobileLayout({
+  children,
+  router,
+  categoriesToDisplay,
+  onNavItemClick,
+}: {
+  children: React.ReactNode;
+  router: NextRouter;
+  categoriesToDisplay: string[];
+  onNavItemClick: (index: number, navItems: NavItemData[]) => void;
+}) {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const handleOverlayClick = () => {
+    setIsOpen(false);
+    console.log("test");
+  };
+
+  const handleButtonClick = () => {
+    setIsOpen(true);
+    console.log("test");
+  };
+
+  return (
+    <div>
+      {isOpen && (
+        <Nav
+          categoriesToDisplay={categoriesToDisplay}
+          router={router}
+          onNavItemClick={onNavItemClick}
+          onOverlayClick={handleOverlayClick}
+        />
+      )}
+      <div className={styles.main}>
+        {!isOpen && (
+          <div className={styles.burgerContainer}>
+            <button className={styles.burger} onClick={handleButtonClick}>
+              <RxHamburgerMenu />
+            </button>
+          </div>
+        )}
+        {children}
+      </div>
+    </div>
   );
 }

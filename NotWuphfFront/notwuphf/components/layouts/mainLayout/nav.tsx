@@ -19,36 +19,41 @@ export default function Nav({
   router,
   onNavItemClick,
   categoriesToDisplay,
+  onOverlayClick,
 }: {
   router: NextRouter;
   onNavItemClick: (index: number, navItems: NavItemData[]) => void;
   categoriesToDisplay?: string[];
+  onOverlayClick?: () => void;
 }) {
   let categories = getNavItemCategories(categoriesToDisplay);
   const onClickWrapper = (categoryIndex: number, itemIndex: number) => {
     onNavItemClick(itemIndex, categories[categoryIndex].items);
   };
   return (
-    <div className={styles.nav}>
-      <div className={styles.navItemContainer}>
-        <NavTitle />
-        <br />
-        {categories.length > 1 ? (
-          <NavAccordion
-            navItemCategories={categories}
-            router={router}
-            onClickWrapper={onClickWrapper}
-          />
-        ) : (
-          <SingleCategoryNav
-            navItemCategories={categories}
-            router={router}
-            onClickWrapper={onClickWrapper}
-          />
-        )}
+    <>
+      <div className={styles.navOverlay} onClick={onOverlayClick}></div>
+      <div className={styles.nav}>
+        <div className={styles.navItemContainer}>
+          <NavTitle />
+          <br />
+          {categories.length > 1 ? (
+            <NavAccordion
+              navItemCategories={categories}
+              router={router}
+              onClickWrapper={onClickWrapper}
+            />
+          ) : (
+            <SingleCategoryNav
+              navItemCategories={categories}
+              router={router}
+              onClickWrapper={onClickWrapper}
+            />
+          )}
+        </div>
+        <NavUser />
       </div>
-      <NavUser />
-    </div>
+    </>
   );
 }
 

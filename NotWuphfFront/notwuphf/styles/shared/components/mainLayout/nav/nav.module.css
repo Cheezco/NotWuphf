@@ -14,3 +14,23 @@
   display: flex;
   flex-flow: column;
 }
+
+@media only screen and (max-width: 786px) {
+  .nav {
+    width: 70%;
+    position: absolute;
+  }
+  .overlay {
+    position: absolute;
+    background: red;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .navOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+  }
+}

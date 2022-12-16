@@ -6,18 +6,29 @@
   padding: 0.5em;
   border-radius: 5px;
   padding: 1em;
-  width: 500px;
 }
 
 .postTitle {
   font-size: 1.2em;
 }
 
-.commentButton {
+.buttons {
   display: flex;
   justify-content: flex-end;
+  gap: 0.5em;
 }
 
 .commentText {
   font-size: 0.7em;
+}
+
+@media only screen and (max-width: 786px) {
+  .post {
+    gap: 0.5em;
+    width: 100%;
+  }
+
+  .commentText {
+    font-size: 0.8em;
+  }
 }

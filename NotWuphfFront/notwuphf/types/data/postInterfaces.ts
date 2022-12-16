@@ -5,6 +5,11 @@ export interface PostData {
   creationDate: Date;
 }
 
+export interface Posts {
+  posts: PostData[];
+  count: number;
+}
+
 export interface CreatePost {
   name: string;
   body: string;

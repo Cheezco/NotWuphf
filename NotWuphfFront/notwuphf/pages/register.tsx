@@ -1,10 +1,11 @@
 import styles from "styles/pages/register/register.module.css";
 import { useState } from "react";
 import { Input } from "@chakra-ui/react";
-import Button from "../shared/components/Button";
+import Button from "../shared/components/button";
 
 export default function Register() {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
@@ -17,11 +18,15 @@ export default function Register() {
             <Input className={styles.input} />
           </div>
           <div>
+            <label>Email:</label>
+            <Input type="email" className={styles.input} />
+          </div>
+          <div>
             <label>Password:</label>
             <Input type="password" className={styles.input} />
           </div>
           <br />
-          <Button>Login</Button>
+          <Button>Register</Button>
         </form>
       </div>
     </div>
