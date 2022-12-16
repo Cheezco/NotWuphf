@@ -22,7 +22,7 @@ export default function Groups() {
       if (!session || !session.user) return;
 
       const user = session.user as WuphfUser;
-      const data = await getGroups(user.token, 1);
+      const data = await getGroups(user.token, currentPage + 1);
 
       setGroups(data.groups);
       setPageCount(Math.ceil(data.count / 5));
