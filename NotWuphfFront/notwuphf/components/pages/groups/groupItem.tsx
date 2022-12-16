@@ -6,6 +6,7 @@ import styles from "styles/pages/groups/groupItem.module.css";
 import WuphfUser from "../../../types/WuphfUser";
 import WuphfButton from "../../../shared/components/WuphfButton";
 import { GroupData } from "../../../types/data/groupInterfaces";
+import UpdateGroupPanel from "./updateGroupPanel";
 
 export default function GroupItem({
   groupData,
@@ -32,17 +33,19 @@ export default function GroupItem({
     <div className={styles.groupItem}>
       <div className={styles.name}>{groupData?.name}</div>
       <div className={styles.description}>{groupData?.description}</div>
-      <div>
+      <div className={styles.buttonContainer}>
         <WuphfButton
           onClick={() => router.push("/auth/groups/" + groupData?.id)}
         >
           <div className={styles.buttonText}>View</div>
         </WuphfButton>
-        &nbsp;
-        {isAdmin(session?.user as WuphfUser) && (
-          <WuphfButton onClick={handleDeleteClick}>
-            <div className={styles.buttonText}>Delete</div>
-          </WuphfButton>
+        {isAdmin(session?.user as WuphfUser) && groupData && (
+          <>
+            <WuphfButton onClick={handleDeleteClick}>
+              <div className={styles.buttonText}>Delete</div>
+            </WuphfButton>
+            <UpdateGroupPanel groupData={groupData} />
+          </>
         )}
       </div>
     </div>

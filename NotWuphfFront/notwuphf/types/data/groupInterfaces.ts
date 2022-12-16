@@ -1,8 +1,8 @@
 export interface GroupData {
-  id: Number;
+  id: number;
   name: string;
   description: string;
-  visibility: Number;
+  visibility: number;
   creationDate: string;
 }
 
