@@ -24,6 +24,14 @@ export default function MainLayout({
     fallback: false,
   });
 
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (typeof window === "undefined" || session) return;
+
+    router.push("/");
+  }, [session, router]);
+
   return (
     // <DesktopLayout
     //   router={router}
