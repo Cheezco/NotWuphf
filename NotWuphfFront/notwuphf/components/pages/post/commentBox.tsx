@@ -1,6 +1,6 @@
 import styles from "styles/pages/post/commentBox.module.css";
 import { Textarea } from "@chakra-ui/react";
-import Button from "../../../shared/components/button";
+import WuphfButton from "../../../shared/components/WuphfButton";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { createComment } from "@lib/comments";
@@ -49,7 +49,7 @@ export default function CommentBox() {
       />
       <br />
       <div className={styles.button}>
-        <Button>Comment</Button>
+        <WuphfButton>Comment</WuphfButton>
       </div>
     </form>
   );

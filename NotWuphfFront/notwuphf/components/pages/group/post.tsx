@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { NextRouter, useRouter } from "next/router";
 import styles from "styles/pages/group/post.module.css";
 import WuphfUser from "types/WuphfUser";
-import Button from "../../../shared/components/button";
+import WuphfButton from "../../../shared/components/WuphfButton";
 import { PostData } from "../../../types/data/postInterfaces";
 
 export default function Post({
@@ -33,17 +33,17 @@ export default function Post({
       <div>{postData?.body}</div>
       <div className={styles.buttons}>
         {isAdmin(session?.user as WuphfUser) && (
-          <Button onClick={handleDeleteClick}>
+          <WuphfButton onClick={handleDeleteClick}>
             <div className={styles.commentText}>Delete</div>
-          </Button>
+          </WuphfButton>
         )}
-        <Button
+        <WuphfButton
           onClick={() =>
             router.push("/auth/groups/" + groupId + "/posts/" + postData?.id)
           }
         >
           <div className={styles.commentText}>Comments</div>
-        </Button>
+        </WuphfButton>
       </div>
     </div>
   );

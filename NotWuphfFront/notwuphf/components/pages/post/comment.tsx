@@ -1,6 +1,6 @@
 import { isAdmin } from "@lib/AuthHelpers";
 import { deleteComment } from "@lib/comments";
-import Button from "@shared/components/button";
+import WuphfButton from "@shared/components/WuphfButton";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import styles from "styles/pages/post/comment.module.css";
@@ -45,9 +45,9 @@ export default function Comment({
       <div>{comment}</div>
       {isAdmin(session?.user as WuphfUser) && (
         <div className={styles.button}>
-          <Button onClick={handleDeleteClick}>
+          <WuphfButton onClick={handleDeleteClick}>
             <div className={styles.buttonText}>Delete</div>
-          </Button>
+          </WuphfButton>
         </div>
       )}
     </div>

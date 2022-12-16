@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { NextRouter } from "next/router";
 import styles from "styles/pages/groups/groupItem.module.css";
 import WuphfUser from "types/WuphfUser";
-import Button from "../../../shared/components/button";
+import WuphfButton from "../../../shared/components/WuphfButton";
 import { GroupData } from "../../../types/data/groupInterfaces";
 
 export default function GroupItem({
@@ -33,14 +33,16 @@ export default function GroupItem({
       <div className={styles.name}>{groupData?.name}</div>
       <div className={styles.description}>{groupData?.description}</div>
       <div>
-        <Button onClick={() => router.push("/auth/groups/" + groupData?.id)}>
+        <WuphfButton
+          onClick={() => router.push("/auth/groups/" + groupData?.id)}
+        >
           <div className={styles.buttonText}>View</div>
-        </Button>
+        </WuphfButton>
         &nbsp;
         {isAdmin(session?.user as WuphfUser) && (
-          <Button onClick={handleDeleteClick}>
+          <WuphfButton onClick={handleDeleteClick}>
             <div className={styles.buttonText}>Delete</div>
-          </Button>
+          </WuphfButton>
         )}
       </div>
     </div>

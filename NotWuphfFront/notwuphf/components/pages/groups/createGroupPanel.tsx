@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { createGroup } from "@lib/groups";
-import Button from "@shared/components/button";
+import WuphfButton from "@shared/components/WuphfButton";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -50,7 +50,7 @@ export default function CreateGroupPanel() {
 
   return (
     <div className={styles.container}>
-      <Button onClick={onOpen}>Create group</Button>
+      <WuphfButton onClick={onOpen}>Create group</WuphfButton>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -65,7 +65,7 @@ export default function CreateGroupPanel() {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleButtonClick}>Create</Button>
+            <WuphfButton onClick={handleButtonClick}>Create</WuphfButton>
           </ModalFooter>
         </ModalContent>
       </Modal>
