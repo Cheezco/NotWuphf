@@ -62,7 +62,7 @@ function getNavItemCategories(
 
   let allCategories = [
     {
-      name: "user",
+      name: "GroupUser",
       text: "Vartotojo puslapiai",
       items: [
         {
