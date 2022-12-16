@@ -6,6 +6,8 @@ import Nav from "../../../components/layouts/mainLayout/nav";
 import { NavItemData } from "../../../types/mainLayout/navTypes";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useSession } from "next-auth/react";
+import { getRoles } from "../../../lib/AuthHelpers";
+import WuphfUser from "../../../types/WuphfUser";
 
 export default function MainLayout({
   children,
@@ -13,18 +15,18 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const onNavItemClick = (index: number, navItems: NavItemData[]) => {
     if (navItems.length <= index || index < 0) return;
 
     router.push(navItems[index].href);
   };
-  let categoriesToDisplay = ["user"];
+  let categoriesToDisplay = getRoles(session?.user as WuphfUser);
   const [isMobile] = useMediaQuery("(max-width:786px)", {
     ssr: true,
     fallback: false,
   });
-
-  const { data: session } = useSession();
 
   useEffect(() => {
     if (typeof window === "undefined" || session) return;
