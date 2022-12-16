@@ -19,10 +19,6 @@ namespace NotWuphfAPI.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Group>()
-                .HasMany(x => x.Members)
-                .WithMany(x => x.Groups);
-
-            modelBuilder.Entity<Group>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.OwnedGroups);
 

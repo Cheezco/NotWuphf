@@ -48,12 +48,27 @@ namespace NotWuphfAPI.Infrastructure
                 .AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
                 .AddTransient<IJwtTokenService, JwtTokenService>()
                 .AddScoped<AuthDbSeeder>()
-                .AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationHandler>();
+                //.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationHandler>()
+                .AddSingleton<IAuthorizationHandler, GroupOwnerAuthorizationHandler>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", x =>
+                {
+                    x.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("Pagination");
+                });
+            });
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(PolicyNames.ResourceOwner,
-                    policy => policy.Requirements.Add(new ResourceOwnerRequirement()));
+                // options.AddPolicy(PolicyNames.ResourceOwner,
+                //     policy => policy.Requirements.Add(new ResourceOwnerRequirement()));
+                
+                options.AddPolicy(PolicyNames.GroupPolicy,
+                    policy => policy.Requirements.Add(new GroupRequirement()));
             });
 
 

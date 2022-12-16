@@ -1,0 +1,16 @@
+.button {
+  font-size: 20px;
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 5px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+}
+
+.button:hover {
+  background: #6609c3;
+  transition-duration: 0.1s;
+}

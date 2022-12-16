@@ -30,7 +30,8 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetPosts")]
-        public async Task<ActionResult<IEnumerable<PostDTO>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        [Authorize(Roles = GroupRoles.GroupUser)]
+        public async Task<ActionResult<IEnumerable<PostDto>>> GetMany(int groupId, int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var spec = new PostsSpec(groupId, page, pageSize);
             var posts = await _postsRepository.ListAsync(spec);
@@ -60,10 +61,11 @@ namespace NotWuphfAPI.Web.Controllers
             
             Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-            return posts.ToDTO();
+            return posts.ToDto();
         }
 
         [HttpGet("{postId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IActionResult> Get(int groupId, int postId)
         {
             var spec = new PostByIdSpec(groupId, postId);
@@ -71,11 +73,12 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (post is null) return NotFound();
 
-            return Ok(post.ToDTO());
+            return Ok(post.ToDto());
         }
 
         [HttpPost]
-        public async Task<ActionResult<PostDTO>> Create(int groupId, CreatePostDTO createPostDto)
+        [Authorize(Roles = GroupRoles.GroupUser)]
+        public async Task<ActionResult<PostDto>> Create(int groupId, CreatePostDto createPostDto)
         {
             var groupSpec = new GroupByIdSpec(groupId);
             var groupExists = await _groupsRepository.AnyAsync(groupSpec);
@@ -93,18 +96,19 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _postsRepository.AddAsync(post);
 
-            return Created("", post.ToDTO());
+            return Created("", post.ToDto());
         }
 
         [HttpPut("{postId:int}")]
-        public async Task<ActionResult<PostDTO>> Update(int groupId, int postId, UpdatePostDTO updatePostDto)
+        [Authorize(Roles = GroupRoles.GroupUser)]
+        public async Task<ActionResult<PostDto>> Update(int groupId, int postId, UpdatePostDto updatePostDto)
         {
             var spec = new PostByIdSpec(groupId, postId);
             var post = await _postsRepository.FirstOrDefaultAsync(spec);
 
             if (post is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
@@ -115,10 +119,11 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _postsRepository.UpdateAsync(post);
 
-            return Ok(post.ToDTO());
+            return Ok(post.ToDto());
         }
 
         [HttpDelete("{postId:int}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<ActionResult> Remove(int groupId, int postId)
         {
             var spec = new PostByIdSpec(groupId, postId);
@@ -126,7 +131,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (post is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, post, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {

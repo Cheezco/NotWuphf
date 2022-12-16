@@ -5,10 +5,10 @@ namespace NotWuphfAPI.Core.Extensions
 {
     public static class CommentExtensions
     {
-        public static CommentDTO ToDTO(this Comment comment)
+        public static CommentDto ToDto(this Comment comment)
             => new(comment.Id, comment.Content, comment.CreationDate);
 
-        public static List<CommentDTO> ToDTO(this IEnumerable<Comment> comments)
-            => comments.Select(x => x.ToDTO()).ToList();
+        public static List<CommentDto> ToDto(this IEnumerable<Comment> comments)
+            => comments.Select(x => x.ToDto()).ToList();
     }
 }

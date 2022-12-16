@@ -5,6 +5,6 @@ namespace NotWuphfAPI.Core.Auth.Extensions;
 
 public static class UserExtensions
 {
-    public static UserDTO ToDTO(this WuphfUser user)
+    public static UserDto ToDto(this WuphfUser user)
         => new(user.Id, user.UserName, user.Email);
 }

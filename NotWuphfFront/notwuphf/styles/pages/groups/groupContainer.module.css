@@ -1,0 +1,4 @@
+.groupContainer {
+  display: flex;
+  flex-flow: column;
+}

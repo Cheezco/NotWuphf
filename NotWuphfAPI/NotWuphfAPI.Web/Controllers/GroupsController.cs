@@ -27,7 +27,8 @@ namespace NotWuphfAPI.Web.Controllers
         }
 
         [HttpGet(Name = "GetGroups")]
-        public async Task<IEnumerable<GroupDTO>> GetMany(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
+        [Authorize(Roles = GroupRoles.GroupUser)]
+        public async Task<IEnumerable<GroupDto>> GetMany(int page = PaginationHelper.DefaultPage, int pageSize = PaginationHelper.DefaultPageSize)
         {
             var groupSpec = new GroupsSpec(page, pageSize);
             var groups = await _groupsRepository.ListAsync(groupSpec);
@@ -57,10 +58,11 @@ namespace NotWuphfAPI.Web.Controllers
             
             Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-            return groups.ToDTO();
+            return groups.ToDto();
         }
 
         [HttpGet("{groupId}")]
+        [Authorize(Roles = GroupRoles.GroupUser)]
         public async Task<IActionResult> Get(int groupId)
         {
             var spec = new GroupByIdSpec(groupId);
@@ -69,12 +71,12 @@ namespace NotWuphfAPI.Web.Controllers
             if (group is null) return NotFound();
 
 
-            return Ok(group.ToDTO());
+            return Ok(group.ToDto());
         }
 
         [HttpPost]
         [Authorize(Roles = GroupRoles.GroupUser)]
-        public async Task<ActionResult<GroupDTO>> Create(CreateGroupDTO createGroupDto)
+        public async Task<ActionResult<GroupDto>> Create(CreateGroupDto createGroupDto)
         {
             var group = new Group()
             {
@@ -89,19 +91,19 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _groupsRepository.AddAsync(group);
 
-            return Created("", group.ToDTO());
+            return Created("", group.ToDto());
         }
 
         [HttpPut("{groupId:int}")]
         [Authorize(Roles = GroupRoles.GroupUser)]
-        public async Task<ActionResult<GroupDTO>> Update(int groupId, UpdateGroupDTO updateGroupDto)
+        public async Task<ActionResult<GroupDto>> Update(int groupId, UpdateGroupDto updateGroupDto)
         {
             var spec = new GroupByIdSpec(groupId);
             var group = await _groupsRepository.FirstOrDefaultAsync(spec);
 
             if (group is null) return NotFound();
 
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {
@@ -114,7 +116,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _groupsRepository.UpdateAsync(group);
 
-            return Ok(group.ToDTO());
+            return Ok(group.ToDto());
         }
 
         [HttpDelete("{groupId:int}")]
@@ -126,7 +128,7 @@ namespace NotWuphfAPI.Web.Controllers
 
             if (group is null) return NotFound();
             
-            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.ResourceOwner);
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, group, PolicyNames.GroupPolicy);
             
             if (!authorizationResult.Succeeded)
             {

@@ -1,0 +1,33 @@
+.post {
+  display: flex;
+  flex-flow: column;
+  color: white;
+  padding: 1em;
+}
+
+.title {
+  display: flex;
+  font-size: 1.2em;
+}
+
+.input {
+  min-height: 150px !important;
+}
+
+.input:focus {
+  border: 1px solid #6609c3 !important;
+  box-shadow: 0 0 0 1px #6609c3 !important;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 786px) {
+  .backButton {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

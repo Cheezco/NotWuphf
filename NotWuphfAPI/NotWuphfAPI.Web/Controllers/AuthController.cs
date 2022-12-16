@@ -29,7 +29,7 @@ namespace NotWuphfAPI.Web.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register(RegisterUserDTO registerUserDto)
+        public async Task<IActionResult> Register(RegisterUserDto registerUserDto)
         {
             var user = await _userManager.FindByNameAsync(registerUserDto.UserName);
 
@@ -48,12 +48,12 @@ namespace NotWuphfAPI.Web.Controllers
 
             await _userManager.AddToRoleAsync(newUser, GroupRoles.GroupUser);
 
-            return CreatedAtAction(nameof(Register), newUser.ToDTO());
+            return CreatedAtAction(nameof(Register), newUser.ToDto());
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(LoginUserDTO loginUserDto)
+        public async Task<IActionResult> Login(LoginUserDto loginUserDto)
         {
             var user = await _userManager.FindByNameAsync(loginUserDto.UserName);
 
@@ -66,7 +66,7 @@ namespace NotWuphfAPI.Web.Controllers
             var roles = await _userManager.GetRolesAsync(user);
             var accessToken = _jwtTokenService.CreateAccessToken(user.UserName, user.Id, roles);
             
-            return Ok(new SuccessfulLoginDTO(accessToken));
+            return Ok(new SuccessfulLoginDto(accessToken));
         }
     }
 }

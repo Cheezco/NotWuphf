@@ -1,0 +1,58 @@
+.container {
+  color: white;
+  display: flex;
+  gap: 1em;
+  padding: 0.5em;
+}
+
+.buttonActive,
+.buttonInactive {
+  text-align: center;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  border-radius: 100%;
+  font-size: 16px;
+}
+
+.buttonInactive:disabled,
+.buttonActive:disabled,
+.button:disabled {
+  background: rgba(0, 0, 0, 0.1);
+  color: gray;
+}
+
+.buttonActive {
+  background: #6609c3;
+  transition-duration: 0.3s;
+}
+
+.buttonActive:not(:disabled):hover {
+  background: #770be4;
+  transition-duration: 0.1s;
+}
+
+.buttonInactive {
+  background: rgba(0, 0, 0, 0.3);
+  transition-duration: 0.3s;
+}
+
+.buttonInactive:not(:disabled):hover {
+  background: rgba(0, 0, 0, 0.7);
+  transition-duration: 0.1s;
+}
+
+.button {
+  background: rgba(0, 0, 0, 0.3);
+  transition-duration: 0.3s;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border-radius: 100%;
+}
+
+.button:not(:disabled):hover {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.7);
+  transition-duration: 0.1s;
+}

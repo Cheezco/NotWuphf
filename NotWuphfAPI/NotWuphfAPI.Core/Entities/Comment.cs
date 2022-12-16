@@ -4,7 +4,7 @@ using NotWuphfAPI.Core.Auth.Model;
 
 namespace NotWuphfAPI.Core.Entities
 {
-    public class Comment : EntityBase, IUserOwnedResource
+    public class Comment : EntityBase, IGroupResource
     {
         public string Content { get; set; }
         
@@ -13,6 +13,8 @@ namespace NotWuphfAPI.Core.Entities
         public DateTime UpdateDate { get; set; }
         
         public Post Post { get; set; }
+
+        public string GroupOwnerId => Post.GroupOwnerId;
         
         [Required]
         public string UserId { get; set; }

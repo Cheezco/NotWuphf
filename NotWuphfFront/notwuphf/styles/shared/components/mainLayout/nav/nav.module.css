@@ -1,0 +1,36 @@
+.nav {
+  top: 0;
+  position: static;
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-flow: column;
+  justify-content: space-between;
+  background-color: #1f1f1f;
+  color: rgb(223, 223, 223);
+}
+
+.navItemContainer {
+  display: flex;
+  flex-flow: column;
+}
+
+@media only screen and (max-width: 786px) {
+  .nav {
+    width: 70%;
+    position: absolute;
+  }
+  .overlay {
+    position: absolute;
+    background: red;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .navOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
