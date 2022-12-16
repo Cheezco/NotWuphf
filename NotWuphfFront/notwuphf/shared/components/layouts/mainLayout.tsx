@@ -19,7 +19,7 @@ export default function MainLayout({
     router.push(navItems[index].href);
   };
   let categoriesToDisplay = ["user"];
-  const [isMobile] = useMediaQuery("(max-width:786px", {
+  const [isMobile] = useMediaQuery("(max-width:786px)", {
     ssr: true,
     fallback: false,
   });
@@ -117,12 +117,10 @@ function MobileLayout({
 
   const handleOverlayClick = () => {
     setIsOpen(false);
-    console.log("test");
   };
 
   const handleButtonClick = () => {
     setIsOpen(true);
-    console.log("test");
   };
 
   return (
