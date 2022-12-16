@@ -36,7 +36,7 @@ namespace NotWuphfAPI.Web.Controllers
             var spec = new PostsSpec(groupId, page, pageSize);
             var posts = await _postsRepository.ListAsync(spec);
             
-            var totalCount = await _postsRepository.CountAsync();
+            var totalCount = await _postsRepository.CountAsync(spec);
             var totalPages = PaginationHelper.CalculateTotalPages(pageSize, totalCount);
             var currentPage = PaginationHelper.GetCurrentPage(totalCount, page);
             var fixedPageSize = PaginationHelper.CalculatePageSize(pageSize);

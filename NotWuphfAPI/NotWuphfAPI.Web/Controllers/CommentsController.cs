@@ -36,7 +36,7 @@ namespace NotWuphfAPI.Web.Controllers
             var spec = new CommentsSpec(groupId, postId, page, pageSize);
             var comments = await _commentsRepository.ListAsync(spec);
             
-            var totalCount = await _commentsRepository.CountAsync();
+            var totalCount = await _commentsRepository.CountAsync(spec);
             var totalPages = PaginationHelper.CalculateTotalPages(pageSize, totalCount);
             var currentPage = PaginationHelper.GetCurrentPage(totalCount, page);
             var fixedPageSize = PaginationHelper.CalculatePageSize(pageSize);

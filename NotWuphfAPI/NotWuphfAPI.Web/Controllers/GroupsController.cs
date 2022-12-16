@@ -33,7 +33,7 @@ namespace NotWuphfAPI.Web.Controllers
             var groupSpec = new GroupsSpec(page, pageSize);
             var groups = await _groupsRepository.ListAsync(groupSpec);
 
-            var totalCount = await _groupsRepository.CountAsync();
+            var totalCount = await _groupsRepository.CountAsync(groupSpec);
             var totalPages = PaginationHelper.CalculateTotalPages(pageSize, totalCount);
             var currentPage = PaginationHelper.GetCurrentPage(totalCount, page);
             var fixedPageSize = PaginationHelper.CalculatePageSize(pageSize);
