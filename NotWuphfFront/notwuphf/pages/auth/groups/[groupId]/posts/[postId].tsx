@@ -15,6 +15,7 @@ import WuphfUser from "../../../../../types/WuphfUser";
 import { getPost } from "../../../../../lib/posts";
 import { getComments } from "../../../../../lib/comments";
 import Pagination from "../../../../../shared/components/pagination";
+import { GetServerSideProps } from "next";
 
 export default function Post() {
   const router = useRouter();
@@ -88,3 +89,7 @@ export default function Post() {
     </MainLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {} };
+};

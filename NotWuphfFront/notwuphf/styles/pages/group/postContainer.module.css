@@ -1,5 +1,6 @@
 .postContainer {
   display: flex;
+  width: 500px;
   flex-flow: column;
   justify-content: center;
   gap: 1em;

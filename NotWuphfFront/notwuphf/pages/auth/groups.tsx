@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { getGroups } from "../../lib/groups";
 import Pagination from "../../shared/components/pagination";
 import CreateGroupPanel from "../../components/pages/groups/createGroupPanel";
+import { GetServerSideProps } from "next";
 
 export default function Groups() {
   const { data: session } = useSession();
@@ -21,14 +22,14 @@ export default function Groups() {
       if (!session || !session.user) return;
 
       const user = session.user as WuphfUser;
-      const data = await getGroups(user.token, 1);
+      const data = await getGroups(user.token, currentPage + 1);
 
       setGroups(data.groups);
       setPageCount(Math.ceil(data.count / 5));
     };
 
-    fetchData().catch((x) => console.log(x));
-  }, [session]);
+    fetchData();
+  }, [session, currentPage]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -46,3 +47,7 @@ export default function Groups() {
     </MainLayout>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {} };
+};

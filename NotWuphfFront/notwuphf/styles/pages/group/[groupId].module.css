@@ -1,3 +1,9 @@
+.backButton {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+}
+
 @media only screen and (max-width: 786px) {
   .backButton {
     display: flex;
