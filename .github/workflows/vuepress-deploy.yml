@@ -10,7 +10,7 @@ jobs:
       - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
         with:
-          path: ${{ gihub.workspace }}
+          cache-dependency-path: ./NotWuphfDocumentation/package.json
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: Cheezco/NotWuphf
