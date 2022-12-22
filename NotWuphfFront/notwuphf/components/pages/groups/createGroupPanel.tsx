@@ -17,7 +17,11 @@ import { useState } from "react";
 import styles from "styles/pages/groups/createGroupPanel.module.css";
 import WuphfUser from "../../../types/WuphfUser";
 
-export default function CreateGroupPanel() {
+export default function CreateGroupPanel({
+  refreshData,
+}: {
+  refreshData: () => void;
+}) {
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -45,7 +49,11 @@ export default function CreateGroupPanel() {
       { name: name, description: description, visibility: 0 },
       user.token
     );
-    router.reload();
+    refreshData();
+    onClose();
+    setName("");
+    setDescription("");
+    //router.reload();
   };
 
   return (
