@@ -13,5 +13,5 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: Cheezco/NotWuphf
           TARGET_BRANCH: master
-          BUILD_SCRIPT: npm --prefix ./NotWuphfDocumentation run build
+          BUILD_SCRIPT: npm --prefix ./NotWuphfDocumentation run docs:build
           BUILD_DIR: docs/.vuepress/dist
