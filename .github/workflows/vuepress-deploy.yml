@@ -9,11 +9,9 @@ jobs:
 
       - name: vuepress-deploy
         uses: jenkey2011/vuepress-deploy@master
-        with:
-          cache-dependency-path: ./NotWuphfDocumentation/package.json
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           TARGET_REPO: Cheezco/NotWuphf
           TARGET_BRANCH: master
-          BUILD_SCRIPT: npm run build
+          BUILD_SCRIPT: npm --prefix ./NotWuphfDocumentation run build
           BUILD_DIR: docs/.vuepress/dist
