@@ -6,7 +6,7 @@ export default function MyGroups() {
   return (
     <MainLayout>
       <MainPanel>
-        <GroupContainer />
+        <GroupContainer refreshData={() => {}} />
       </MainPanel>
     </MainLayout>
   );
