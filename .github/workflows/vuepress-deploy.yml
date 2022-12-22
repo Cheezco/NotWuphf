@@ -14,4 +14,4 @@ jobs:
           TARGET_REPO: Cheezco/NotWuphf
           TARGET_BRANCH: master
           BUILD_SCRIPT: npm run build
-          BUILD_DIR: ../docs
+          BUILD_DIR: docs/.vuepress/dist
